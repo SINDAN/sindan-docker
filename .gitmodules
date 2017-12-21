@@ -1,0 +1,3 @@
+[submodule "webui/sindan-visualization"]
+	path = webui/sindan-visualization
+	url = https://git@github.com/SINDAN/sindan-visualization.git
