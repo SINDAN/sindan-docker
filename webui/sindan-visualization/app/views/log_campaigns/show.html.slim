@@ -1,0 +1,66 @@
+- provide :title, t('views.log_campaigns.show.title')
+
+p
+  a.btn.btn-default href="#{edit_log_campaign_path(@log_campaign)}" #{t('helpers.links.edit')}
+
+table.table
+  colgroup
+    col.col-xs-2
+    col.col-xs-10
+  tbody
+    tr
+      th #{t('activerecord.attributes.log_campaign.log_campaign_uuid')}
+      td #{@log_campaign.log_campaign_uuid}
+    tr
+      th #{t('activerecord.attributes.log_campaign.ssid')}
+      td #{@log_campaign.ssid}
+    tr
+      th #{t('activerecord.attributes.log_campaign.mac_addr')}
+      td #{@log_campaign.mac_addr}
+    tr
+      th #{t('activerecord.attributes.log_campaign.os')}
+      td #{@log_campaign.os}
+    tr
+      th #{t('activerecord.attributes.log_campaign.occurred_at')}
+      td #{datetime_view(@log_campaign.occurred_at)}
+
+
+h2 #{t('views.diagnosis_logs.index.title')}
+
+p
+  ul.nav.nav-tabs
+    li.presentation class="#{current_class(all_log_campaign_path(@log_campaign))}"
+      a href="#{all_log_campaign_path(@log_campaign)}" All
+    li.presentation class="#{current_class(log_campaign_path(@log_campaign))}"
+      a href="#{log_campaign_path(@log_campaign)}" Log
+    li.presentation class="#{current_class(error_log_campaign_path(@log_campaign))}"
+      a href="#{error_log_campaign_path(@log_campaign)}" Error
+
+table.table.table-condensed.table-bordered
+  colgroup
+    col.col-xs-2
+    col.col-xs-2
+    col.col-xs-2
+    col.col-xs-6
+  thead
+    tr
+      th #{t('activerecord.attributes.diagnosis_log.layer')}
+      th #{t('activerecord.attributes.diagnosis_log.log_group')}
+      th #{t('activerecord.attributes.diagnosis_log.log_type')}
+      th #{t('activerecord.attributes.diagnosis_log.detail')}
+  tbody
+    - @diagnosis_logs.each do |diagnosis_log|
+      tr class="#{class_row_result(diagnosis_log.result_label)}"
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            | #{diagnosis_log.layer_label}
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            | #{diagnosis_log.log_group}
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            | #{diagnosis_log.log_type}
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            - unless diagnosis_log.detail.nil?
+              | #{diagnosis_log.detail[0..100]}

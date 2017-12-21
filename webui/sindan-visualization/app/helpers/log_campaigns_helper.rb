@@ -1,0 +1,2 @@
+module LogCampaignsHelper
+end

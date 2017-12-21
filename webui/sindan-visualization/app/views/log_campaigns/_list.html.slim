@@ -1,0 +1,36 @@
+p
+  = paginate @log_campaigns
+
+table.table.table-condensed.table-bordered.table-striped
+  colgroup
+    col.col-xs-3
+    col.col-xs-2
+    col.col-xs-2
+    col.col-xs-3
+    col.col-xs-2
+  thead
+    tr
+      th #{t('activerecord.attributes.log_campaign.log_campaign_uuid')}
+      th #{t('activerecord.attributes.log_campaign.ssid')}
+      th #{t('activerecord.attributes.log_campaign.mac_addr')}
+      th #{t('activerecord.attributes.log_campaign.os')}
+      th #{t('activerecord.attributes.log_campaign.occurred_at')}
+  tbody
+    - @log_campaigns.each do |log_campaign|
+      - cache log_campaign
+        tr class="#{class_row_result(log_campaign.result)}"
+          td
+            a href="#{log_campaign_path(log_campaign)}"
+              | #{log_campaign.log_campaign_uuid}
+          td
+            a href="#{log_campaign_path(log_campaign)}"
+              | #{ log_campaign.ssid}
+          td
+            a href="#{log_campaign_path(log_campaign)}"
+              | #{ log_campaign.mac_addr}
+          td
+            a href="#{log_campaign_path(log_campaign)}"
+              | #{ log_campaign.os}
+          td
+            a href="#{log_campaign_path(log_campaign)}"
+              | #{datetime_view(log_campaign.occurred_at)}

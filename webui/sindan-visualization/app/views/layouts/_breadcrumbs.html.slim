@@ -1,0 +1,10 @@
+- if elements.present?
+  ol.breadcrumb
+    - elements[0..-2].each do |element|
+      li
+        - if element.path.present?
+          a href="#{element.path}" #{element.name}
+        - else
+          | #{element.name}
+    li.active
+      | #{elements.last.name}

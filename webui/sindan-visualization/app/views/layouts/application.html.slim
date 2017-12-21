@@ -1,0 +1,100 @@
+doctype html
+html
+  head
+    meta charset="utf-8"
+    meta http-equiv="X-UA-Compatible" content="IE=Edge"
+    meta name="viewport" content="width=device-width"
+    title #{full_title(yield(:title))}
+
+    /! Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      = javascript_include_tag "html5shiv", skip_pipeline: true
+    = stylesheet_link_tag "application", media: "all"
+    = javascript_include_tag "application"
+    = content_for :header
+    = csrf_meta_tags
+
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand href="#{root_path}"
+            span.fa.fa-heartbeat.fa-fw
+            |  #{t('common.site_title')}
+        .navbar-collapse.collapse
+          ul.nav.navbar-nav
+            li
+              a href="#{about_path}" #{t('views.static_pages.about.title')}
+            - if current_user
+              li.dropdown
+                a data-toggle="dropdown" data-target="#" href="#{diagnosis_logs_path}"
+                  | #{t('activerecord.models.diagnosis_logs')}
+                  |  
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a href="#{diagnosis_logs_path}" All
+                  - @diagnosis_log_dates.each do |diagnosis_log_date|
+                    li
+                      a href="#{diagnosis_logs_path(date: diagnosis_log_date)}" #{diagnosis_log_date}
+              li
+                a href="#{log_campaigns_path}" #{t('activerecord.models.log_campaigns')}
+              li.dropdown
+                a data-toggle="dropdown" data-target="#" href="#{statuses_path}"
+                  | #{t('views.statuses.index.title')}
+                  |  
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a href="#{statuses_path}" All
+                  - @ssid_list.each do |ssid|
+                    li
+                      a href="#{statuses_path(ssid: ssid)}" #{ssid}
+              li.dropdown
+                a.dropdown-toggle href="#" data-toggle="dropdown"
+                  | #{t('views.settings.index.title')}
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    a href="#{ignore_error_results_path}" #{t('views.ignore_error_results.index.title')}
+          ul.nav.navbar-nav.navbar-right
+            - unless current_user
+              li
+                a href="#{user_session_path}" #{t('helpers.links.login')}
+            - else
+              li
+                a href="#{search_log_campaigns_path}" title="#{t('views.log_campaigns.search.title')}"
+                  i.fa.fa-search
+                  |  #{t('views.log_campaigns.search.title')}
+              li.dropdown
+                a.dropdown-toggle href="#" data-toggle="dropdown"
+                  i.fa.fa-user.fa-lg.fa-fw
+                  | #{current_user.login} 
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    = link_to t('helpers.links.logout'), destroy_user_session_path, method: :delete
+        /!.navbar-collapse.collapse
+
+    .container
+      .row
+        .col-sm-12.col-lg-12
+          = render_breadcrumbs builder: ::CustomBreadcrumbsBuilder
+
+          - unless notice.blank?
+            p.alert.alert-success #{notice}
+          - unless alert.blank?
+            p.alert.alert-danger #{alert}
+
+          .page-header
+            h1 #{yield :title}
+
+          = yield
+    
+      footer
+        hr

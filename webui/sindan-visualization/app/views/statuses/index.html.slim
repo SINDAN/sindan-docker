@@ -1,0 +1,67 @@
+- provide :title, "SSID: #{@ssid}"
+
+table.table.status-layer
+  thead
+    tr
+      th Layer
+      - @time_list.each do |t|
+        th #{t.strftime("%H:%M")}
+  tbody
+    - @layers.each do |layer|
+      tr
+        th #{DiagnosisLog.layer_label(layer)}
+        - @time_list.each_with_index do |t, index|
+          - logs = @target_logs.layer_by(layer).occurred_after(t).occurred_before(@time_list[index + 1])
+          td
+            - if logs.count.zero?
+              span.dot-default
+            - elsif logs.fail.count.zero?
+              span.dot-success
+            - else
+              - log = logs.fail.map { |l| "#{l.log}<br />" }.join
+              a data-toggle="popover" title="Errors" data-content="#{log}"
+                span.dot-danger
+
+h2 #{t('views.diagnosis_logs.index.title')}
+
+table.table.table-condensed.table-bordered
+  colgroup
+    col.col-xs-2
+    col.col-xs-2
+    col.col-xs-2
+    col.col-xs-3
+    col.col-xs-3
+  thead
+    tr
+      th #{t('activerecord.attributes.diagnosis_log.layer')}
+      th #{t('activerecord.attributes.diagnosis_log.log_group')}
+      th #{t('activerecord.attributes.diagnosis_log.log_type')}
+      th #{t('activerecord.attributes.diagnosis_log.log_campaign_uuid')}
+      th #{t('activerecord.attributes.diagnosis_log.occurred_at')}
+  tbody
+    - @diagnosis_logs.each do |diagnosis_log|
+      - cache diagnosis_log
+        tr class="#{class_row_result(diagnosis_log.result)}"
+          td
+            a href="#{diagnosis_log_path(diagnosis_log)}"
+              | #{diagnosis_log.layer_label}
+          td
+            a href="#{diagnosis_log_path(diagnosis_log)}"
+              | #{diagnosis_log.log_group}
+          td
+            a href="#{diagnosis_log_path(diagnosis_log)}"
+              | #{diagnosis_log.log_type}
+          td
+            a href="#{diagnosis_log_path(diagnosis_log)}"
+              | #{diagnosis_log.log_campaign_uuid}
+          td
+            a href="#{diagnosis_log_path(diagnosis_log)}"
+              | #{datetime_view(diagnosis_log.occurred_at)}
+
+- content_for :header do
+  javascript:
+    $(function() {
+      $('td a').popover({
+        html: true
+      });
+    });

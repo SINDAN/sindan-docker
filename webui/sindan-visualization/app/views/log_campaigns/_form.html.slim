@@ -1,0 +1,36 @@
+= form_for @log_campaign, html: { class: "form-horizontal" } do |f|
+  - if @log_campaign.errors.any?
+    #error_explanation.bs-callout.bs-callout-danger
+      ul.text-danger
+        - @log_campaign.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    .control-label.col-sm-2
+      = f.label :log_campaign_uuid
+    .col-sm-4
+      = f.text_field :log_campaign_uuid, class: "form-control"
+  .form-group
+    .control-label.col-sm-2
+      = f.label :ssid
+    .col-sm-4
+      = f.text_field :ssid, class: "form-control"
+  .form-group
+    .control-label.col-sm-2
+      = f.label :mac_addr
+    .col-sm-4
+      = f.text_field :mac_addr, class: "form-control"
+  .form-group
+    .control-label.col-sm-2
+      = f.label :os
+    .col-sm-4
+      = f.text_field :os, class: "form-control"
+  .form-group
+    .control-label.col-sm-2
+      = f.label :occurred_at
+    .col-sm-4
+      = f.datetime_select :occurred_at
+
+  .form-group
+    .col-sm-10.col-sm-offset-2
+      = f.submit id: "submit_log_campaign", class: "btn btn-primary"

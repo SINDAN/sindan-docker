@@ -1,0 +1,32 @@
+table.table.table-condensed.table-bordered
+  colgroup
+    col.col-xs-2
+    col.col-xs-2
+    col.col-xs-2
+    col.col-xs-3
+    col.col-xs-3
+  thead
+    tr
+      th #{t('activerecord.attributes.diagnosis_log.layer')}
+      th #{t('activerecord.attributes.diagnosis_log.log_group')}
+      th #{t('activerecord.attributes.diagnosis_log.log_type')}
+      th #{t('activerecord.attributes.diagnosis_log.log_campaign_uuid')}
+      th #{t('activerecord.attributes.diagnosis_log.occurred_at')}
+  tbody
+    - diagnosis_logs.each do |diagnosis_log|
+      tr class="#{diagnosis_log.fail? ? 'danger' : diagnosis_log.result }"
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            | #{diagnosis_log.layer_label}
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            | #{diagnosis_log.log_group}
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            | #{diagnosis_log.log_type}
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            | #{diagnosis_log.log_campaign_uuid}
+        td
+          a href="#{diagnosis_log_path(diagnosis_log)}"
+            | #{datetime_view(diagnosis_log.occurred_at)}

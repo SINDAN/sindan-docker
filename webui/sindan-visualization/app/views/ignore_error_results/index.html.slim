@@ -1,0 +1,25 @@
+- provide :title, t('views.ignore_error_results.index.title')
+
+p
+  a.btn.btn-default href="#{new_ignore_error_result_path}" #{t('helpers.links.new')}
+
+table.table.table-condensed.table-bordered.table-striped
+  colgroup
+    col.col-xs-3
+    col.col-xs-9
+  thead
+    tr
+      th #{t('activerecord.attributes.ignore_error_result.ssid')}
+      th #{t('activerecord.attributes.ignore_error_result.ignore_log_types')}
+  tbody
+    - @ignore_error_results.each do |ignore_error_result|
+      tr
+        td
+          a href="#{ignore_error_result_path(ignore_error_result)}"
+            | #{ignore_error_result.ssid}
+        td
+          a href="#{ignore_error_result_path(ignore_error_result)}"
+            - ignore_error_result.ignore_log_types.each_with_index do |ignore_log_type, index|
+              | #{ignore_log_type}
+              - unless index == ignore_error_result.ignore_log_types.length - 1
+                |  / 

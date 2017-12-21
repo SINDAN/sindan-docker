@@ -1,0 +1,42 @@
+- provide :title, t('views.log_campaigns.index.title')
+
+.panel.panel-default
+  .panel-heading
+    h3.panel-title #{t('views.log_campaigns.search.search_condition')}
+  .panel-body
+    = form_tag search_log_campaigns_path, method: :get, class: "form-horizontal", enforce_utf8: false do
+      .form-group
+        .control-label.col-sm-2
+          = label_tag :keyword
+        .col-sm-8
+          = text_field_tag :keyword, @keyword, class: "form-control"
+      .form-group
+        .control-label.col-sm-2
+          = label_tag :datetime
+        .col-sm-4
+          .input-group.date#datetime_from
+            = text_field_tag :datetime_from, @datetime_from, class: "form-control"
+            span.input-group-addon
+              i.fa.fa-calendar
+        .col-sm-4
+          .input-group.date#datetime_to
+            = text_field_tag :datetime_to, @datetime_to, class: "form-control"
+            span.input-group-addon
+              i.fa.fa-calendar
+      .form-group
+        .col-sm-10.col-sm-offset-2
+          = submit_tag t('views.log_campaigns.search.search_button'), name: nil, class: "btn btn-primary"
+
+= render 'list'
+
+- content_for :header do
+  javascript:  
+    $(function () {
+      var datetime_format = 'YYYY-MM-DDTHH:mm:ssZ'
+      $('#datetime_from').datetimepicker({
+        format: datetime_format
+      });
+      $('#datetime_to').datetimepicker({
+        format: datetime_format
+      });
+    });
