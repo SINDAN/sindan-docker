@@ -12,11 +12,14 @@ to administorator for troubleshooting.
 
 ## Preparation
 
-* To build docker container:
+* To build docker containers:
 	* ./build.sh
 
-* To exce docker container:
-	* ./boot.sh
+* To exce docker containers:
+	* ./start.sh
+
+* To stop docker containers
+	* ./stop.sh
 
 ## Usage
 
