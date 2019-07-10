@@ -1,4 +1,4 @@
-FROM ruby:2.3.1
+FROM ruby:latest
 
 ENV APP_ROOT /usr/src/sindan-visualization
 
