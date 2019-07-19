@@ -1,4 +1,4 @@
-FROM ruby:latest
+FROM ruby:2.6.3
 
 ENV APP_ROOT /usr/src/sindan-visualization
 
@@ -10,7 +10,7 @@ RUN apt-get update && \
                        ansible \
                        sudo \
                        git \
-                       mysql-client \
+                       default-mysql-client \
                        --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
