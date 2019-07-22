@@ -1,0 +1,63 @@
+version: '3.4'
+
+services:
+  fluentd:
+    image: fluentd-sindan:v1.6-1
+    build:
+      context: ./fluentd
+    expose:
+      - "9900"
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    healthcheck:
+      test: curl -f http://127.0.0.1:9900 || exit 1
+      interval: "5s"
+      timeout: "1s"
+      retries: 3
+      start_period: "20s"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    volumes:
+      - fluentd-data:/fluentd/log
+    labels:
+      com.sindan-net.description: "Receive from sindan-client and forward to MySQL"
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    expose:
+      - "3306"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$(cat /run/secrets/db_password)
+      interval: "5s"
+      timeout: "1s"
+      retries: 3
+      start_period: "20s"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: "sindan"
+      MYSQL_DATABASE: "sindan_production"
+      MYSQL_PASSWORD_FILE: "/run/secrets/db_password"
+    secrets:
+      - db_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    labels:
+      com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
+
+secrets:
+  db_password:
+    file: .secrets/db_password.txt
+
+volumes:
+  mysql-data:
+  fluentd-data:
