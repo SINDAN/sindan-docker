@@ -3,8 +3,7 @@ LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 
 USER root
 
-RUN apk add --no-cache --update --virtual .build-deps \
-        sudo build-base ruby-dev \
+RUN apk add --no-cache --update --virtual .build-deps sudo build-base ruby-dev \
  && sudo gem install fluent-plugin-mysql \
  && sudo gem sources --clear-all \
  && apk del .build-deps \
