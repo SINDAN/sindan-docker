@@ -1,0 +1,3 @@
+[submodule "visualization/sindan-visualization"]
+	path = visualization/sindan-visualization
+	url = https://github.com/SINDAN/sindan-visualization
