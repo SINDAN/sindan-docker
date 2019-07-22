@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
   mysql:
@@ -6,18 +6,32 @@ services:
     restart: always
     expose:
       - "3306"
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$(cat /run/secrets/db_password)
+      interval: "5s"
+      timeout: "1s"
+      retries: 3
+      start_period: "20s"
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    env_file:
-      - ./env/default.env
-      - ./env/secret.env
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: "sindan"
+      MYSQL_DATABASE: "sindan_production"
+      MYSQL_PASSWORD_FILE: "/run/secrets/db_password"
+    secrets:
+      - db_password
     volumes:
-      - "mysql-data:/var/lib/mysql"
+      - mysql-data:/var/lib/mysql
     labels:
       com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
+
+secrets:
+  db_password:
+    file: .secrets/db_password.txt
 
 volumes:
   mysql-data:
