@@ -36,6 +36,7 @@ services:
     volumes:
       - fluentd-data:/fluentd/log
     labels:
+      com.sindan-net.description: "Receive logs from sindan-clients and forward them to MySQL"
 
   mysql:
     image: mysql:5.7
