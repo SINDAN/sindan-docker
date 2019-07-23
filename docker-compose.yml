@@ -20,11 +20,15 @@ services:
     build:
       context: ./fluentd
     restart: always
+    depends_on:
+      - mysql
     expose:
       - "9900"
     ports:
       - "24224:24224"
       - "24224:24224/udp"
+    secrets:
+      - db_password
     healthcheck:
       << : *default-healthcheck
       test: curl -f http://127.0.0.1:9900 || exit 1
@@ -43,8 +47,8 @@ services:
       - db_password
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_USER: "sindan"
-      MYSQL_DATABASE: "sindan_production"
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_GRANTED_USER}
       MYSQL_PASSWORD_FILE: "/run/secrets/db_password"
     healthcheck:
       << : *default-healthcheck
@@ -55,6 +59,30 @@ services:
     labels:
       com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
 
+  visualization:
+    image: sindan-visualization:2.6.3-alpine
+    build:
+      context: ./visualization
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "3000:3000"
+    secrets:
+      - db_password
+    command: bundle exec rails -s -p 3000 -b '0.0.0.0'
+    environment:
+      SINDAN_VISUALIZATION_DATABASE_PASSWORD: $$(cat /run/secrets/db_password)
+    healthcheck:
+      << : *default-healthcheck
+      test: curl -I -f http://127.0.0.1:3000 || exit 1
+      timeout: "2s"
+    logging: *default-logging
+    volumes:
+      - visualization-data:/app
+    labels:
+      com.sindan-net.description: "Web frontend to manage diagnosis logs"
+
 secrets:
   db_password:
     file: .secrets/db_password.txt
@@ -62,3 +90,4 @@ secrets:
 volumes:
   fluentd-data:
   mysql-data:
+  visualization-data:
