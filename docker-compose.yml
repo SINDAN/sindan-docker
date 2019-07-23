@@ -71,8 +71,6 @@ services:
     secrets:
       - db_password
     command: bundle exec rails -s -p 3000 -b '0.0.0.0'
-    environment:
-      SINDAN_VISUALIZATION_DATABASE_PASSWORD: $$(cat /run/secrets/db_password)
     healthcheck:
       << : *default-healthcheck
       test: curl -I -f http://127.0.0.1:3000 || exit 1

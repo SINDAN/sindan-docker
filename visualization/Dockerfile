@@ -8,10 +8,10 @@ ENV RAILS_ENV=production
 WORKDIR /app
 
 ADD sindan-visualization/. .
-COPY database.yml .
+COPY database.yml ./config
 
 RUN apk add --no-cache --update \
-      libxml2-dev libxslt-dev libstdc++ tzdata nodejs ca-certificates \
+      libxml2-dev libxslt-dev libstdc++ tzdata nodejs mariadb-connector-c ca-certificates \
  && apk add --no-cache --update --virtual .build-deps \
       build-base mariadb-dev \
  && gem install bundler --no-document \
