@@ -30,6 +30,8 @@ services:
       - "24224:24224/udp"
     secrets:
       - db_password
+    env_file:
+      - .env
     healthcheck:
       << : *default-healthcheck
       test: curl -f http://127.0.0.1:9900 || exit 1
