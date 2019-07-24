@@ -2,12 +2,12 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: mysql
-  password:
-  socket: /tmp/mysql.sock
+  host: mysql
+  port: 3306
 
 production:
   <<: *default
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_GRANTED_USER'] %>
-  password: <%= File.open('/db_password.txt').read.chomp %=>
+  # password: <%= File.open('/run/secrets/db_password').read.chomp %=>
+  password: changeme

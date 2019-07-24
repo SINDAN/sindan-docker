@@ -9,6 +9,7 @@ WORKDIR /app
 
 COPY sindan-visualization/. .
 COPY database.yml ./config
+COPY secrets.yml ./config
 
 RUN apk add --no-cache --update \
       libxml2-dev libxslt-dev libstdc++ tzdata nodejs mariadb-connector-c ca-certificates \

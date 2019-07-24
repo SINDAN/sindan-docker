@@ -19,6 +19,7 @@ services:
     image: fluentd-sindan:v1.6-1
     build:
       context: ./fluentd
+    hostname: sindan-fluentd
     restart: always
     depends_on:
       - mysql
@@ -40,6 +41,7 @@ services:
 
   mysql:
     image: mysql:5.7
+    hostname: sindan-mysql
     restart: always
     expose:
       - "3306"
@@ -63,6 +65,7 @@ services:
     image: sindan-visualization:2.6.3-alpine
     build:
       context: ./visualization
+    hostname: sindan-visualization
     restart: always
     depends_on:
       - mysql
@@ -70,6 +73,9 @@ services:
       - "3000:3000"
     secrets:
       - db_password
+      - rails_secret_key_base
+    env_file:
+      - .env
     command: bundle exec rails -s -p 3000 -b '0.0.0.0'
     healthcheck:
       << : *default-healthcheck
@@ -84,6 +90,8 @@ services:
 secrets:
   db_password:
     file: .secrets/db_password.txt
+  rails_secret_key_base:
+    file: .secrets/rails_secret_key_base.txt
 
 volumes:
   fluentd-data:
