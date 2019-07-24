@@ -1,5 +1,8 @@
 #!/bin/sh
 
+git submodule init
+git submodule update
+
 # mysql
 sudo docker build -t mysql mysql
 sudo docker build -t fluentd fluentd
