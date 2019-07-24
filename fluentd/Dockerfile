@@ -6,7 +6,7 @@ ENV LANG C.UTF-8
 USER root
 
 RUN apk add --no-cache --update --virtual .build-deps \
-        build-base ruby-dev mariadb-dev \
+      build-base ruby-dev mariadb-dev \
  && gem install fluent-plugin-mysql \
  && gem sources --clear-all \
  && apk del .build-deps \
