@@ -9,5 +9,4 @@ production:
   <<: *default
   database: <%= ENV['DB_NAME'] %>
   username: <%= ENV['DB_GRANTED_USER'] %>
-  # password: <%= File.open('/run/secrets/db_password').read.chomp %=>
-  password: changeme
+  password: <%= File.open('/run/secrets/db_password').read.chomp %>
