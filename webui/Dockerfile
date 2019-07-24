@@ -34,5 +34,6 @@ RUN \
 #COPY Gemfile.lock $APP_ROOT
 
 COPY database.yml $APP_ROOT/config/
+COPY seeds.rb $APP_ROOT/db/
 
 CMD ["rails", "server", "-b", "0.0.0.0"]
