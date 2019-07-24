@@ -7,7 +7,7 @@ ENV RAILS_ENV=production
 
 WORKDIR /app
 
-ADD sindan-visualization/. .
+COPY sindan-visualization/. .
 COPY database.yml ./config
 
 RUN apk add --no-cache --update \
