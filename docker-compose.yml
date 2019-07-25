@@ -23,18 +23,15 @@ services:
     restart: always
     depends_on:
       - mysql
-    expose:
-      - "9900"
     ports:
-      - "24224:24224"
-      - "24224:24224/udp"
+      - "8888:8888"
     secrets:
       - db_password
     env_file:
       - .env
     healthcheck:
       << : *default-healthcheck
-      test: curl -f http://127.0.0.1:9900 || exit 1
+      test: curl -f http://127.0.0.1:8080 || exit 1
     logging: *default-logging
     volumes:
       - fluentd-data:/fluentd/log

@@ -3,6 +3,7 @@ LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 
 ENV LANG C.UTF-8
 ENV BUNDLE_JOBS=4
+ENV TZ=Asia/Tokyo
 ENV RAILS_ENV=production
 
 WORKDIR /app
