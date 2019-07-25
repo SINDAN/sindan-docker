@@ -5,8 +5,10 @@ ENV LANG C.UTF-8
 
 USER root
 
-RUN apk add --no-cache --update --virtual .build-deps \
-      build-base ruby-dev mariadb-dev \
+RUN apk add --no-cache --update \
+      mariadb-connector-c \
+ && apk add --no-cache --update --virtual .build-deps \
+      build-base ruby-dev mariadb-dev mariadb-connector-c \
  && gem install fluent-plugin-http-heartbeat \
  && gem install fluent-plugin-mysql \
  && gem sources --clear-all \
