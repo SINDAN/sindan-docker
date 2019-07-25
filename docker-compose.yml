@@ -65,6 +65,7 @@ services:
     image: sindan-visualization:2.6.3-alpine
     build:
       context: ./visualization
+      target: production
     hostname: sindan-visualization
     restart: always
     depends_on:
