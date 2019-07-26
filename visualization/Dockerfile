@@ -7,12 +7,8 @@ ENV RAILS_ENV=production
 
 WORKDIR /app
 
-COPY sindan-visualization/Gemfile .
-COPY sindan-visualization/Gemfile.lock .
-COPY sindan-visualization/Rakefile .
-COPY sindan-visualization/app/assets app/assets
-COPY sindan-visualization/bin bin
-COPY sindan-visualization/config config
+COPY sindan-visualization/. .
+COPY database.yml config
 COPY secrets.yml config
 
 RUN apk add --no-cache --update \
@@ -23,6 +19,7 @@ RUN apk add --no-cache --update \
  && bundle install --without development test --path vendor/bundle
 
 RUN --mount=type=secret,id=rails_secret,target=/run/secrets/rails_secret_key_base,required \
+    --mount=type=secret,id=db_pass,target=/run/secrets/db_password,required \
     bundle exec rails assets:precompile
 
 FROM ruby:2.6.3-alpine as production
