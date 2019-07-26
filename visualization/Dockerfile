@@ -37,7 +37,7 @@ COPY database.yml config
 COPY secrets.yml config
 
 RUN apk add --no-cache --update \
-      libxml2-dev libxslt-dev libstdc++ tzdata mariadb-connector-c ca-certificates
+      libxml2-dev libxslt-dev libstdc++ tzdata nodejs mariadb-connector-c ca-certificates
 
 COPY --from=builder /app/vendor/bundle vendor/bundle
 COPY --from=builder /usr/local/bundle /usr/local/bundle
