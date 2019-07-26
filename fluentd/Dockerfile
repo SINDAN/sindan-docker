@@ -5,6 +5,7 @@ ENV LANG C.UTF-8
 
 USER root
 
+# hadolint ignore=DL3018,DL3028
 RUN apk add --no-cache --update mariadb-connector-c \
  && apk add --no-cache --update --virtual .build-deps \
       build-base ruby-dev mariadb-dev mariadb-connector-c \

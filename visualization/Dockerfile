@@ -12,6 +12,7 @@ COPY database.yml config
 COPY secrets.yml config
 COPY seeds.rb db
 
+# hadolint ignore=DL3018,DL3028
 RUN apk add --no-cache --update \
       build-base  alpine-sdk tzdata shadow sudo ca-certificates \
       nodejs busybox-suid mariadb-dev mariadb-connector-c-dev libxml2-dev libxslt-dev libstdc++ \
@@ -19,6 +20,7 @@ RUN apk add --no-cache --update \
  && bundle config build.nokogiri --use-system-libraries \
  && bundle install --without development test --path vendor/bundle
 
+# hadolint ignore=SC2215
 RUN --mount=type=secret,id=rails_secret,target=/run/secrets/rails_secret_key_base,required \
     --mount=type=secret,id=db_pass,target=/run/secrets/db_password,required \
     bundle exec rails assets:precompile
@@ -38,6 +40,7 @@ COPY database.yml config
 COPY secrets.yml config
 COPY seeds.rb db
 
+# hadolint ignore=DL3018,DL3028
 RUN apk add --no-cache --update \
       libxml2-dev libxslt-dev libstdc++ tzdata nodejs mariadb-connector-c ca-certificates
 
