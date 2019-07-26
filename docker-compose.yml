@@ -75,6 +75,7 @@ services:
     secrets:
       - db_password
       - rails_secret_key_base
+      - accounts
     env_file:
       - .env
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -93,6 +94,8 @@ secrets:
     file: .secrets/db_password.txt
   rails_secret_key_base:
     file: .secrets/rails_secret_key_base.txt
+  accounts:
+    file: .secrets/accounts.yml
 
 volumes:
   fluentd-data:

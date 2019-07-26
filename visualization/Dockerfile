@@ -10,6 +10,7 @@ WORKDIR /app
 COPY sindan-visualization/. .
 COPY database.yml config
 COPY secrets.yml config
+COPY seeds.rb db
 
 RUN apk add --no-cache --update \
       build-base  alpine-sdk tzdata shadow sudo ca-certificates \
@@ -35,6 +36,7 @@ WORKDIR /app
 COPY sindan-visualization/. .
 COPY database.yml config
 COPY secrets.yml config
+COPY seeds.rb db
 
 RUN apk add --no-cache --update \
       libxml2-dev libxslt-dev libstdc++ tzdata nodejs mariadb-connector-c ca-certificates
