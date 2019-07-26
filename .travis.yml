@@ -10,6 +10,7 @@ service:
   - docker
 
 cache:
+  apt: true
   directories:
     - docker
 
