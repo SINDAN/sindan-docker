@@ -16,7 +16,7 @@ x-logging:
 
 services:
   fluentd:
-    image: fluentd-sindan:v1.6-1
+    image: sindan-fluentd:v1.6-1
     build:
       context: ./fluentd
     hostname: sindan-fluentd
@@ -24,6 +24,7 @@ services:
     depends_on:
       - mysql
     ports:
+      - "8080:8080"
       - "8888:8888"
     secrets:
       - db_password

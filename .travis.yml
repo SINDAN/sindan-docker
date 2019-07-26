@@ -1,0 +1,38 @@
+dist: bionic
+language: generic
+sudo: required
+
+branches:
+  only:
+    - master
+
+service:
+  - docker
+
+cache:
+  directories:
+    - docker
+
+install:
+  - bash .travis/install_docker.sh
+  - docker run --name buildkit -d --privileged -p 1234:1234 moby/buildkit --addr tcp://0.0.0.0:1234
+  - sudo docker cp buildkit:/usr/bin/buildctl /usr/local/bin/
+  - BUILDKIT_HOST=tcp://0.0.0.0:1234 buildctl build --help
+  - mv .secrets/rails_secret_key_base.txt.example .secrets/rails_secret_key_base.txt
+  - mv .secrets/db_password.txt.example .secrets/db_password.txt
+  - mv .secrets/accounts.yml.example .secrets/accounts.yml
+
+jobs:
+  include:
+    - stage: "Test: building"
+      script: bash .travis/test_building_fluentd.sh
+      name: "Building sindan-fluentd"
+    - script: bash .travis/test_building_visualization.sh
+      name: "Building sindan-visualization (with build-time secret option)"
+    - stage: "Test: initializing and running"
+      script:
+        - gzip -dc docker/fluentd.tar.gz | docker load
+        - gzip -dc docker/visualization.tar.gz | docker load
+        - bash .travis/test_initializing.sh
+        - bash .travis/test_running.sh
+      name: "Initialize database and start rails app with fluentd"
