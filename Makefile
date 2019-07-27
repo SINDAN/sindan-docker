@@ -12,6 +12,7 @@ lint: fluentd/Dockerfile visualization/Dockerfile
 
 .PHONY: build
 build:
+	git submodule update --init --recursive
 	docker-compose pull mysql
 	$(BUILDKIT_DOCKER_BUILD) fluentd -t $(SINDAN_FLUENTD_TAG)
 	$(BUILDKIT_DOCKER_BUILD) visualization -t $(SINDAN_VISUALIZATION_TAG) \
@@ -34,6 +35,10 @@ init: build
 .PHONY: run
 run:
 	docker-compose up -d
+
+.PHONY: log
+log:
+	docker-compose logs -f
 
 .PHONY: stop
 stop:

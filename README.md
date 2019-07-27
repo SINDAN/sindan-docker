@@ -57,7 +57,7 @@ $ make init
 ### Deploy
 Deploy containers built previous steps.
 ```
-$ make run
+$ make run log
 ```
 Open your favorite browser and go [http://localhost:3000](http://localhost:3000) to see SINDAN Web.
 
@@ -82,4 +82,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 See also the list of [contributors](https://github.com/mi2428/sindan-docker/graphs/contributors) who participated in this project.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
