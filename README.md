@@ -14,7 +14,7 @@ Please visit website [sindan-net.com](https://www.sindan-net.com) for more detai
 > In order to detect network failure, SINDAN project evaluates the network status based on user-side observations, and aims to establish a method that enables network operators to troubleshoot quickly.
 
 ## Getting Started
-These instructions will get you a copy of this project up and running on your environment for production purposes.
+These instructions will get you a copy of this project up and running on your environment for production purpose.
 If you want to use this for development or testing purposes, it is necessary to edit some configurations appropriately.
 
 ### Prerequisites
