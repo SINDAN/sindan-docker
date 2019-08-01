@@ -77,7 +77,8 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/mi2428/sindan-docker/tags).
 
 ## Authors
-- **Taichi MIYA** - *Initial work* - [@mi2428](https://github.com/mi2428)
+- **Tomohiro ISHIHARA** - *Initial work & patch contribution* - [@shored](https://github.com/shored)
+- **Taichi MIYA** - *Overhaul & Refactoring* - [@mi2428](https://github.com/mi2428)
 
 See also the list of [contributors](https://github.com/mi2428/sindan-docker/graphs/contributors) who participated in this project.
 
