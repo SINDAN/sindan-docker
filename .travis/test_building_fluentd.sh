@@ -9,7 +9,8 @@ BUILDKIT_HOST=tcp://0.0.0.0:1234 \
   buildctl build --no-cache --frontend dockerfile.v0 --local context=. --local dockerfile=. --progress plain \
     --output type=docker,name=$IMAGE_TAG | docker load
 
-(( $? > 0 )) && exit 1
+st=$?
+(( $st > 0 )) && exit $st
 
 popd
 

@@ -11,7 +11,8 @@ BUILDKIT_HOST=tcp://0.0.0.0:1234 \
    --secret id=db_pass,src=../.secrets/db_password.txt \
    --output type=docker,name=$IMAGE_TAG | docker load
 
-(( $? > 0 )) && exit 1
+st=$?
+(( $st > 0 )) && exit $st
 
 popd
 
