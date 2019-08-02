@@ -2,11 +2,11 @@
 
 # sindan-docker
 
-[![Build Status](https://travis-ci.com/mi2428/sindan-docker.svg?token=4rNKUsBRFsZs9zARiDBB&branch=master)](https://travis-ci.com/mi2428/sindan-docker) [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE) [![Issues](https://img.shields.io/github/issues/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/issues)
+[![Build Status](https://travis-ci.org/SINDAN/sindan-docker.svg?branch=master)](https://travis-ci.org/SINDAN/sindan-docker) [![BSD-3-Clause License](http://img.shields.io/github/license/SINDAN/sindan-docker)](LICENSE) [![Issues](https://img.shields.io/github/issues/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/issues)
 [![last commit](https://img.shields.io/github/last-commit/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/commits) [![Releases](https://img.shields.io/github/release/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)  [![relase date](https://img.shields.io/github/release-date/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)
 
 Dockerization of server-side [@SINDAN](https://github.com/SINDAN) suite
-- **[Branch: shored-master](https://github.com/SINDAN/sindan-docker/tree/shored-master)** Previous generation maintained by [@shored](https://github.com/shored)
+- **[Branch: shored-master](https://github.com/SINDAN/sindan-docker/tree/shored-master)** Previous generation maintained by [@shored](https://github.com/shored) (soon to be deprecated and removed)
 
 ## About SINDAN Project
 Please visit website [sindan-net.com](https://www.sindan-net.com) for more details. (Japanese edition only)
@@ -83,4 +83,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 See also the list of [contributors](https://github.com/SINDAN/sindan-docker/graphs/contributors) who participated in this project.
 
 ## License
-<!-- This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. -->
+This project is licensed under the BSD 3-Clause "New" or "Revised" License - see the [LICENSE](LICENSE) file for details.
