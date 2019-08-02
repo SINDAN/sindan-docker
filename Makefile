@@ -1,6 +1,6 @@
 BUILDKIT_DOCKER_BUILD    = DOCKER_BUILDKIT=1 docker build
-SINDAN_FLUENTD_TAG       = sindan-fluentd:v1.6-1
-SINDAN_VISUALIZATION_TAG = sindan-visualization:2.6.3-alpine
+SINDAN_FLUENTD_TAG       = sindan/fluentd:1.1.0
+SINDAN_VISUALIZATION_TAG = sindan/visualization:1.1.0
 
 .PHONY: all
 all: run
@@ -14,10 +14,15 @@ lint: fluentd/Dockerfile visualization/Dockerfile
 build:
 	git submodule update --init --recursive
 	docker-compose pull mysql
-	$(BUILDKIT_DOCKER_BUILD) fluentd -t $(SINDAN_FLUENTD_TAG)
-	$(BUILDKIT_DOCKER_BUILD) visualization -t $(SINDAN_VISUALIZATION_TAG) \
+	$(BUILDKIT_DOCKER_BUILD) fluentd --no-cache -t $(SINDAN_FLUENTD_TAG)
+	$(BUILDKIT_DOCKER_BUILD) visualization --no-cache -t $(SINDAN_VISUALIZATION_TAG) \
 		--secret id=rails_secret,src=.secrets/rails_secret_key_base.txt \
 		--secret id=db_pass,src=.secrets/db_password.txt
+
+.PHONY: push
+push:
+	docker push $(SINDAN_FLUENTD_TAG)
+	docker push $(SINDAN_VISUALIZATION_TAG)
 
 .PHONY: init
 init: build
