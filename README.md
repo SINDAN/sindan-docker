@@ -1,12 +1,12 @@
- ![SINDAN Project](https://raw.githubusercontent.com/mi2428/sindan-docker/screenshot/logo.png)
+ ![SINDAN Project](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/logo.png)
 
 # sindan-docker
 
-[![Build Status](https://travis-ci.com/mi2428/sindan-docker.svg?token=4rNKUsBRFsZs9zARiDBB&branch=master)](https://travis-ci.com/mi2428/sindan-docker) [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE) [![Issues](https://img.shields.io/github/issues/mi2428/sindan-docker)](https://github.com/mi2428/sindan-docker/issues)
-[![last commit](https://img.shields.io/github/last-commit/mi2428/sindan-docker)](https://github.com/mi2428/sindan-docker/commits) [![Releases](https://img.shields.io/github/release/mi2428/sindan-docker)](https://github.com/mi2428/sindan-docker/releases)  [![relase date](https://img.shields.io/github/release-date/mi2428/sindan-docker)](https://github.com/mi2428/sindan-docker/releases)
+[![Build Status](https://travis-ci.com/mi2428/sindan-docker.svg?token=4rNKUsBRFsZs9zARiDBB&branch=master)](https://travis-ci.com/mi2428/sindan-docker) [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE) [![Issues](https://img.shields.io/github/issues/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/issues)
+[![last commit](https://img.shields.io/github/last-commit/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/commits) [![Releases](https://img.shields.io/github/release/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)  [![relase date](https://img.shields.io/github/release-date/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)
 
-Yet another dockerization of server-side [@SINDAN](https://github.com/SINDAN) suite
-- **[sindan/sindan_docker](https://github.com/SINDAN/sindan_docker)** Official repository maintained by [@shored](https://github.com/shored)
+Dockerization of server-side [@SINDAN](https://github.com/SINDAN) suite
+- **[Branch: shored-master](https://github.com/SINDAN/sindan-docker/tree/shored-master)** Previous generation maintained by [@shored](https://github.com/shored)
 
 ## About SINDAN Project
 Please visit website [sindan-net.com](https://www.sindan-net.com) for more details. (Japanese edition only)
@@ -61,7 +61,7 @@ $ make run log
 ```
 Open your favorite browser and go [http://localhost:3000](http://localhost:3000) to see SINDAN Web.
 
-![Safari screenshot](https://raw.githubusercontent.com/mi2428/sindan-docker/screenshot/safari.png)
+![Safari screenshot](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/safari.png)
 
 ### Stop and remove
 ```
@@ -74,13 +74,13 @@ $ make destroy  # remove all containers, volumes, images
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/mi2428/sindan-docker/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/SINDAN/sindan-docker/tags).
 
 ## Authors
-- **Tomohiro ISHIHARA** - *Initial work & patch contribution* - [@shored](https://github.com/shored)
+- **Tomohiro ISHIHARA** - *Initial work & Patch contribution* - [@shored](https://github.com/shored)
 - **Taichi MIYA** - *Overhaul & Refactoring* - [@mi2428](https://github.com/mi2428)
 
-See also the list of [contributors](https://github.com/mi2428/sindan-docker/graphs/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/SINDAN/sindan-docker/graphs/contributors) who participated in this project.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+<!-- This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. -->
