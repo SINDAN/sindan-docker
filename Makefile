@@ -24,8 +24,13 @@ push:
 	docker push $(SINDAN_FLUENTD_TAG)
 	docker push $(SINDAN_VISUALIZATION_TAG)
 
+.PHONY: pull
+pull:
+	docker pull $(SINDAN_FLUENTD_TAG)
+	docker pull $(SINDAN_VISUALIZATION_TAG)
+
 .PHONY: init
-init: build
+init:
 	docker-compose up -d mysql
 	bash -c \
 	'while true; do \

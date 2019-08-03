@@ -18,13 +18,13 @@ These instructions will get you a copy of this project up and running on your en
 If you want to use this for development or testing purposes, it is necessary to edit some configurations appropriately.
 
 ### Prerequisites
-**Docker with BuildKit support is needed.**
+To build images, **Docker with BuildKit support is needed.**
 GNU/Make is not necessary, but it can reduce the number of commands you type.
 
 - docker-engine: 18.06.0 and higher
 - docker-compose: 1.22.0 and higher
 
-### Build docker image and initialize DB
+### Setup secrets
 Set the password of MySQL database.
 This file will not be tracked by Git.
 ```bash
@@ -47,11 +47,17 @@ accounts:
     email: fuga@example.jp
     password: changeme
 ```
-Build dockerfile and initialize database.
-This might take a while.
+
+### Build/Get docker image and initialize DB
+Build dockerfile and initialize database. This might take a while.
 ```bash
 $ cp .secrets/rails_secret_key_base.txt.example .secrets/rails_secret_key_base.txt
-$ make init
+$ make build init
+```
+Instead of building locally, you can download built container images from [DockerHub](https://hub.docker.com/u/sindan).
+```bash
+$ cp .secrets/rails_secret_key_base.txt.example .secrets/rails_secret_key_base.txt
+$ make pull init
 ```
 
 ### Deploy
