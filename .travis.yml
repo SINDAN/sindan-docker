@@ -48,6 +48,13 @@ jobs:
         - gzip -dc docker/fluentd.tar.gz | docker load
         - gzip -dc docker/visualization.tar.gz | docker load
         - bash .travis/deploy_dockerhub.sh
+    # - name: "Deploy to GitHub Package Registry"
+    #   install: false
+    #   script:
+    #     - ls -al docker
+    #     - gzip -dc docker/fluentd.tar.gz | docker load
+    #     - gzip -dc docker/visualization.tar.gz | docker load
+    #     - bash .travis/deploy_github.sh
 
 env:
   global:
@@ -56,3 +63,9 @@ env:
 
     # DOCKER_HUB_PASSWORD
     - secure: tSln9Hr6GoAEygnRgmCL/LWkM2pLmt3v4JpqsMo/WIQjShJIdTm63LJaZzBKF3Zi422kj16xgwFDcXgB91+P98xrZP9d7frqcWqt4DsBR+YxfO8rYMjwgVKo25ULlKy+AcmBle12aTWNOD2MLIr2QRT9A88CUFMGkKWdAqlzwYsjxVEJmU6aXO86waMY17sT/yIIsqydMmGi6iH6C3tqfR5CSwFvhWhS+kDM9DelS4/YNBzs5sIsQb7/aPH6UWYq09GYcy8kkKVO3XSKt9/miFxgwl65NDWd5XTlWWyXwX7J3X5U8r6dX+WUDh1poXPNpdqgUSjtCWyeQePhm0BDW95wUk40wIHYuxRUEA0jzrQsYKC0GeFxfwEbH7WTbafdFRoh9lfDaL2w5BGamo1wzCA0FW93ygEMO4lDsUtTP/M0yuoP8FJVlj38IFe8nGhLZCs7sHL437zLOmk9HQPXpQzSXVDW/b/80RN2jpiWE2BQysx1WmO2Git8eJFjRkAr564ImHudESHrr1KYOMxaFvkHub5NO780Y31xJgcxe6+RPjgdHGhnuHR19HIJsHHD2NYGO4v008GLtqdJ/47SlpabfRyimZ8qoAy+Ym5Wu8ITSM/FAivh4h2DarhMAP3I+fkE+rnUjLlZlDcb+aClN3ViX14FdgXJT7RcxsLclgA=
+
+    # GITHUB_PKG_USERNAME
+    - secure: FTbOnDYoNu3QCUUJXrMmFxPbwgbxKy3/dEy3hLby37IXHCSzMl8T5qETjT1zXudLuRo/Dl58g/Jb+359owTcSN2WZjCdsn1n97k+StBatB/FMEJmMW3Ylws5P6L56HQpS4SqrXxvGz/2AaJbGVXbChveAdrz2ff1pvaZ1m8RH7zIPXD0d6wiNT5E7FfhyFFpJyFvNBZg0Pyk2Y3IupDQmE0BmYjpq/PdsoK2vd7aUvXgI5thCYQMzWsacObjuaRXbS3pXOAFLyTCzoglyMNLeKBqwwnI1uYNO3aVlr0yq12HypH1HKNPjvqvXE70euBjRs6JZ8nrlOgSV6KvaEYdM1yP/xChp57EG3Xfgq7RUoU28GYf0GdPIJoLpx1ioav3ylm6nm4DCv4q6Q24VICIFdjuQIQ7ktIf9mIRsxzO4U8iHljrbxrNCwBOPteJxfd9BNW8SzuFscQD8Ca++2s4vmzTqaAxXIWq9nmBxyAKpHC2Sngl/FAJkBMKCdJTscgmDzRRw4LfNcuQ7mI+SBoqyGZWiaHbQFk0WItrNx+D03z3KFmhTeuIEATfybPLSnf2NLp7/+Yz9WT5Aw3+hfa7pV6KjDJ8OtV1xaWYM31tF2Fy9hAN4J6UCbMDqw8eqcMYQgnJ+jz9MtxZ4h122G+TG/ePiUSY2f/cNVDfmyZvCOI=
+
+    # GITHUB_PKG_TOKEN
+    - secure: GQoJuJ0ubQJLcVwutZALkR+damhYysauyq2W+qqZi0eka03mqyRUFcrvg47fh6KNARblJqTlY4sIgq0IqqFblRzkgG+xIPsWmGSyU0BTs4AeIKID9HmmvML9wd/bJ6BBTEa/wNO5LD+CdbIeeOgYOsOsMDqb0rikZvwMyRwCmBSESnlUYLzCMN0ideUoiTplrs54qRZwIbhFH93OtMmDFksbearDYxQV40Ay59xEU5Yax4+Cv+M47xchT4w2QFHEVYRRjLTspr1ENNSOa3LX9MHaGi3zFr75OOXfgeqopHhVCvwCvSlq1hlwFIzKfsgthVE6mMiQvow6dmwsW8ydeald+JWbDbQ7FAY2fZ+pOjZLWKmepJPORdrDqj1GOLmVNbarqrmEwkuNOb3voIeOCflctwHznvKKmOuIYFNpd7wnw9iIf2y72sUKA3/1Tp/BB4jceaj/jOn7tQet/P/y/RCQ1XtOx0rcCUVMXubExKoNOfVuBj8F4Wv/kDUdIyy2v08AKpXxnQDNharG0Mhw9J+z7OU7K/tmsJ5QPgcP0QLrzbtTcUgsjt2AKzDz7prCdyxOgZcvEZpwc8sJTmwY9Hx65FNWy+DXZ129SBplRkOCXmJKwCXg8EQBhbBVKdY7WcNEbHBOkG6GNRIjy4EJ/bPTksEgAsCPt0+DOGX5S38=
