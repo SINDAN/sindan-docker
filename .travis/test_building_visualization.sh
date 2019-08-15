@@ -7,6 +7,8 @@ pushd visualization
 
 BUILDKIT_HOST=tcp://0.0.0.0:1234 \
  buildctl build --no-cache --frontend dockerfile.v0 --local context=. --local dockerfile=. --progress plain \
+   --build-arg BUILDTIME_RAILS_SECRETKEY_FILE=/run/secrets/rails_secret_key_base \
+   --build-arg BUILDTIME_DB_PASSWORD_FILE=/run/secrets/db_password \
    --secret id=rails_secret,src=../.secrets/rails_secret_key_base.txt \
    --secret id=db_pass,src=../.secrets/db_password.txt \
    --output type=docker,name=$IMAGE_TAG | docker load
