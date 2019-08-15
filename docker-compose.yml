@@ -81,6 +81,10 @@ services:
       - accounts
     env_file:
       - .env
+    environment:
+      DB_PASSWORD_FILE: "/run/secrets/db_password"
+      RAILS_SECRETKEY_FILE: "/run/secrets/rails_secret_key_base"
+      ACCOUNTS_FILE: "/run/secrets/accounts"
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     healthcheck:
       <<: *default-healthcheck

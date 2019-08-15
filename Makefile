@@ -16,6 +16,8 @@ build:
 	docker-compose pull mysql
 	$(BUILDKIT_DOCKER_BUILD) fluentd --no-cache -t $(SINDAN_FLUENTD_TAG)
 	$(BUILDKIT_DOCKER_BUILD) visualization --no-cache -t $(SINDAN_VISUALIZATION_TAG) \
+		--build-arg BUILDTIME_RAILS_SECRETKEY_FILE=/run/secrets/rails_secret_key_base \
+		--build-arg BUILDTIME_DB_PASSWORD_FILE=/run/secrets/db_password \
 		--secret id=rails_secret,src=.secrets/rails_secret_key_base.txt \
 		--secret id=db_pass,src=.secrets/db_password.txt
 
