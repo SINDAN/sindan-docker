@@ -16,7 +16,7 @@ x-logging:
 
 services:
   fluentd:
-    image: sindan/fluentd:1.1.0
+    image: sindan/fluentd:1.2.0
     build:
       context: ./fluentd
     hostname: sindan-fluentd
@@ -30,6 +30,8 @@ services:
       - db_password
     env_file:
       - .env
+    environment:
+      DB_PASSWORD_FILE: "/run/secrets/db_password"
     healthcheck:
       <<: *default-healthcheck
       test: curl -f http://127.0.0.1:8080 || exit 1
@@ -63,7 +65,7 @@ services:
       com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
-    image: sindan/visualization:1.1.0
+    image: sindan/visualization:1.2.0
     build:
       context: ./visualization
       target: production
