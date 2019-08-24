@@ -16,7 +16,7 @@ x-logging:
 
 services:
   fluentd:
-    image: sindan/fluentd:1.2.0
+    image: sindan/fluentd:1.3.0
     build:
       context: ./fluentd
     hostname: sindan-fluentd
@@ -31,6 +31,7 @@ services:
     env_file:
       - .env
     environment:
+      DB_HOST: mysql
       DB_PASSWORD_FILE: "/run/secrets/db_password"
     healthcheck:
       <<: *default-healthcheck
@@ -65,7 +66,7 @@ services:
       com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
-    image: sindan/visualization:1.2.0
+    image: sindan/visualization:1.3.0
     build:
       context: ./visualization
       target: production
@@ -82,6 +83,7 @@ services:
     env_file:
       - .env
     environment:
+      DB_HOST: mysql
       DB_PASSWORD_FILE: "/run/secrets/db_password"
       RAILS_SECRETKEY_FILE: "/run/secrets/rails_secret_key_base"
       ACCOUNTS_FILE: "/run/secrets/accounts"

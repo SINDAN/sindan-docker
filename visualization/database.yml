@@ -2,7 +2,7 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  host: mysql
+  host: <%= ENV['DB_HOST'] %>
   port: 3306
 
 production:
