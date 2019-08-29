@@ -35,7 +35,7 @@ services:
       DB_PASSWORD_FILE: "/run/secrets/db_password"
     healthcheck:
       <<: *default-healthcheck
-      test: curl -f http://127.0.0.1:8080 || exit 1
+      test: wget --spider http://127.0.0.1:8080/ || exit 1
     logging: *default-logging
     volumes:
       - ./fluentd/fluent.conf:/fluentd/etc/fluent.conf
@@ -90,7 +90,7 @@ services:
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
     healthcheck:
       <<: *default-healthcheck
-      test: curl -I -f http://127.0.0.1:3000 || exit 1
+      test: wget --spider http://127.0.0.1:3000/ || exit 1
       timeout: "2s"
     logging: *default-logging
     volumes:
