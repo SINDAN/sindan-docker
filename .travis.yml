@@ -42,7 +42,6 @@ jobs:
 
     - stage: "Deploy:"
       name: "Deploy to DockerHub"
-      install: false
       script:
         - ls -al docker
         - gzip -dc docker/fluentd.tar.gz | docker load
