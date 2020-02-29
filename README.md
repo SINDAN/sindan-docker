@@ -24,15 +24,26 @@ GNU/Make is not necessary, but it can reduce the number of commands you type.
 - docker-engine: 18.06.0 and higher
 - docker-compose: 1.22.0 and higher
 
+### Clone repository
+First of all, you have to shallow clone this repository recursively with:
+```bash
+$ git clone --recursive --depth 1 https://github.com/SINDAN/sindan-docker
+```
+If you ran simple cloning command without recursive option or downloaded as a zip archive via browser,
+make sure that all submodules are fully updated.
+```bash
+$ git submodule update --init --recursive
+```
+
 ### Setup secrets
+All of password files in this directory are not tracked by Git.
 Set the password of MySQL database.
-This file will not be tracked by Git.
 ```bash
 $ echo PASSWORD_OF_YOUR_ENV | sha256sum | cut -d ' ' -f 1 > .secrets/db_password.txt
 ```
 Register user account of SINDAN Web.
-An account whose name is `sindan` and password is `changeme` is registered by default.
-This file will not be tracked by Git.
+User's password must be **8-72 characters long**.
+Sample `accounts.yml` registers an account whose name is `sindan` and password is `changeme`.
 ```bash
 $ cp .secrets/accounts.yml.example .secrets/accounts.yml
 $ vim .secrets/accounts.yml
