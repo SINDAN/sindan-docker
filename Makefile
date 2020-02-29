@@ -1,6 +1,6 @@
 BUILDKIT_DOCKER_BUILD    = DOCKER_BUILDKIT=1 docker build
-SINDAN_FLUENTD_TAG       = sindan/fluentd:1.3.0
-SINDAN_VISUALIZATION_TAG = sindan/visualization:1.3.0
+SINDAN_FLUENTD_TAG       = sindan/fluentd:1.3.1
+SINDAN_VISUALIZATION_TAG = sindan/visualization:1.3.1
 
 .PHONY: all
 all: run
@@ -64,8 +64,8 @@ clean: stop
 destroy:
 	docker-compose kill
 	docker-compose rm -f
-	docker volume rm -f sindan-docker_fluentd-data
-	docker volume rm -f sindan-docker_mysql-data
-	docker volume rm -f sindan-docker_visualization-data
+	docker volume rm -f $(shell basename $(CURDIR))_fluentd-data
+	docker volume rm -f $(shell basename $(CURDIR))_mysql-data
+	docker volume rm -f $(shell basename $(CURDIR))_visualization-data
 	docker rmi -f $(SINDAN_FLUENTD_TAG)
 	docker rmi -f $(SINDAN_VISUALIZATION_TAG)
