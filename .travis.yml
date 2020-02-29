@@ -47,13 +47,12 @@ jobs:
         - gzip -dc docker/fluentd.tar.gz | docker load
         - gzip -dc docker/visualization.tar.gz | docker load
         - bash .travis/deploy_dockerhub.sh
-    # - name: "Deploy to GitHub Package Registry"
-    #   install: false
-    #   script:
-    #     - ls -al docker
-    #     - gzip -dc docker/fluentd.tar.gz | docker load
-    #     - gzip -dc docker/visualization.tar.gz | docker load
-    #     - bash .travis/deploy_github.sh
+    - name: "Deploy to GitHub Package Registry"
+      script:
+        - ls -al docker
+        - gzip -dc docker/fluentd.tar.gz | docker load
+        - gzip -dc docker/visualization.tar.gz | docker load
+        - bash .travis/deploy_github.sh
 
 env:
   global:
