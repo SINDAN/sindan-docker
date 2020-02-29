@@ -1,12 +1,12 @@
 dist: bionic
 language: generic
-sudo: required
+os: linux
 
 branches:
   only:
     - master
 
-service:
+services:
   - docker
 
 cache:
