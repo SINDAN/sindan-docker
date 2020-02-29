@@ -64,8 +64,8 @@ clean: stop
 destroy:
 	docker-compose kill
 	docker-compose rm -f
-	docker volume rm -f sindan-docker_fluentd-data
-	docker volume rm -f sindan-docker_mysql-data
-	docker volume rm -f sindan-docker_visualization-data
+	docker volume rm -f $(shell basename $(CURDIR))_fluentd-data
+	docker volume rm -f $(shell basename $(CURDIR))_mysql-data
+	docker volume rm -f $(shell basename $(CURDIR))_visualization-data
 	docker rmi -f $(SINDAN_FLUENTD_TAG)
 	docker rmi -f $(SINDAN_VISUALIZATION_TAG)
