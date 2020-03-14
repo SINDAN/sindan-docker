@@ -84,7 +84,10 @@ Open your favorite browser and go [http://localhost:3000](http://localhost:3000)
 
 ![Safari screenshot](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/safari.png)
 
-You can see some graph charts by [Grafana](https://grafana.com/) when you open [http://localhost:3001](http://localhost:3001)
+You can see some graph charts by [Grafana](https://grafana.com/) when you open [http://localhost:3001](http://localhost:3001).
+Firstly, you have to log into the dashboard as a user "*admin*".
+The default password is "*admin*" as well.
+You have to change the password then.
 
 ![screenshot of SINDAN Grafana](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/grafana.png)
 
