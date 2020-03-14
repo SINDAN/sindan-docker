@@ -20,6 +20,7 @@ build:
 		--build-arg BUILDTIME_DB_PASSWORD_FILE=/run/secrets/db_password \
 		--secret id=rails_secret,src=.secrets/rails_secret_key_base.txt \
 		--secret id=db_pass,src=.secrets/db_password.txt
+	docker-compose build grafana
 
 .PHONY: push
 push:

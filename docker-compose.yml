@@ -98,6 +98,22 @@ services:
     labels:
       com.sindan-net.description: "Web frontend to manage diagnosis logs"
 
+  grafana:
+    image: sindan/grafana:6.5.0
+    build:
+      context: ./grafana
+    hostname: sindan-grafana
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_PATHS_CONFIG=/etc/grafana/config.ini
+      - GF_INSTALL_PLUGINS=grafana-clock-panel
+    volumes:
+      - grafana-data:/var/lib/grafana
+
 secrets:
   db_password:
     file: .secrets/db_password.txt
@@ -110,3 +126,4 @@ volumes:
   fluentd-data:
   mysql-data:
   visualization-data:
+  grafana-data:
