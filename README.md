@@ -37,9 +37,13 @@ $ git submodule update --init --recursive
 
 ### Setup secrets
 All of password files in this directory are not tracked by Git.
-Set the password of MySQL database.
+Set the password of MySQL database.  If you are Mac user, please use "*shasum -a 256*" instead of sha256sum below.
 ```bash
 $ echo PASSWORD_OF_YOUR_ENV | sha256sum | cut -d ' ' -f 1 > .secrets/db_password.txt
+```
+Set the hashed password into the grafana datasource file.
+```bash
+$ grafana/set_db_password.sh
 ```
 Register user account of SINDAN Web.
 User's password must be **8-72 characters long**.
@@ -79,6 +83,10 @@ $ make run log
 Open your favorite browser and go [http://localhost:3000](http://localhost:3000) to see SINDAN Web.
 
 ![Safari screenshot](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/safari.png)
+
+You can see some graph charts by [Grafana](https://grafana.com/) when you open [http://localhost:3001](http://localhost:3001)
+
+![screenshot of SINDAN Grafana](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/grafana.png)
 
 ### Stop and remove
 ```
