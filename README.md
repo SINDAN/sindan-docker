@@ -2,8 +2,8 @@
 
 # sindan-docker
 
-[![Build Status](https://travis-ci.org/SINDAN/sindan-docker.svg?branch=master)](https://travis-ci.org/SINDAN/sindan-docker) [![BSD-3-Clause License](http://img.shields.io/github/license/SINDAN/sindan-docker)](LICENSE) [![Issues](https://img.shields.io/github/issues/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/issues)
-[![last commit](https://img.shields.io/github/last-commit/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/commits) [![Releases](https://img.shields.io/github/release/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)  [![relase date](https://img.shields.io/github/release-date/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)
+[![](https://travis-ci.org/SINDAN/sindan-docker.svg?branch=master)](https://travis-ci.org/SINDAN/sindan-docker) [![](http://img.shields.io/github/license/SINDAN/sindan-docker)](LICENSE) [![](https://img.shields.io/github/issues/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/issues)
+[![](https://img.shields.io/github/last-commit/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/commits) [![](https://img.shields.io/github/release/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)  [![](https://img.shields.io/github/release-date/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)
 
 Dockerization of server-side [@SINDAN](https://github.com/SINDAN) suite
 - **[Branch: shored-master](https://github.com/SINDAN/sindan-docker/tree/shored-master)** Previous generation maintained by [@shored](https://github.com/shored) (soon to be deprecated and removed)
