@@ -10,7 +10,7 @@ services:
   - docker
 
 cache:
-  apt: true
+  # apt: true
   directories:
     - docker-fluentd
     - docker-visualization
