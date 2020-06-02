@@ -12,8 +12,7 @@ services:
 cache:
   apt: true
   directories:
-    - docker-fluentd
-    - docker-visualization
+    - docker
 
 install:
   - bash .travis/install_docker.sh
@@ -26,35 +25,37 @@ install:
 
 jobs:
   include:
-    - stage: "Test: building sindan-fluentd"
+    - stage: "Test: building"
       name: "Building sindan-fluentd"
       script: bash .travis/test_building_fluentd.sh
-
-    - stage: "Test: building sindan-visualization"
-      name: "Building sindan-visualization (with build-time secret option)"
+      env:
+        - CACHE_NAME=fluentd
+    - name: "Building sindan-visualization (with build-time secret option)"
       script: bash .travis/test_building_visualization.sh
+      env:
+        - CACHE_NAME=visualization
 
     - stage: "Test: initializing and running"
       name: "Initialize database and start rails app with fluentd"
       script:
-        - ls -al docker-fluentd docker-visualization
-        - gzip -dc docker-fluentd/image.tar.gz | docker load
-        - gzip -dc docker-visualization/image.tar.gz | docker load
+        - ls -al docker
+        - gzip -dc docker/fluentd.tar.gz | docker load
+        - gzip -dc docker/visualization.tar.gz | docker load
         - bash .travis/test_initializing.sh
         - bash .travis/test_running.sh
 
     - stage: "Deploy:"
       name: "Deploy to DockerHub"
       script:
-        - ls -al docker-fluentd docker-visualization
-        - gzip -dc docker-fluentd/image.tar.gz | docker load
-        - gzip -dc docker-visualization/image.tar.gz | docker load
+        - ls -al docker
+        - gzip -dc docker/fluentd.tar.gz | docker load
+        - gzip -dc docker/visualization.tar.gz | docker load
         - bash .travis/deploy_dockerhub.sh
     - name: "Deploy to GitHub Package Registry"
       script:
-        - ls -al docker-fluentd docker-visualization
-        - gzip -dc docker-fluentd/image.tar.gz | docker load
-        - gzip -dc docker-visualization/image.tar.gz | docker load
+        - ls -al docker
+        - gzip -dc docker/fluentd.tar.gz | docker load
+        - gzip -dc docker/visualization.tar.gz | docker load
         - bash .travis/deploy_github.sh
 
 env:

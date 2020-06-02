@@ -19,6 +19,4 @@ st=$?
 popd
 
 docker images
-docker save $IMAGE_TAG | gzip > docker-visualization/image.tar.gz
-
-date > docker-visualization/timestamp.txt
+docker save $IMAGE_TAG | gzip > docker/visualization.tar.gz

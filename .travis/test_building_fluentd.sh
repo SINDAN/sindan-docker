@@ -15,6 +15,4 @@ st=$?
 popd
 
 docker images
-docker save $IMAGE_TAG | gzip > docker-fluentd/image.tar.gz
-
-date > docker-fluentd/timestamp.txt
+docker save $IMAGE_TAG | gzip > docker/fluentd.tar.gz
