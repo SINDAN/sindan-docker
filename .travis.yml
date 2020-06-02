@@ -25,12 +25,24 @@ install:
 
 jobs:
   include:
-    - stage: "Test: building"
+    # - stage: "Test: building"
+    #   name: "Building sindan-fluentd"
+    #   script: bash .travis/test_building_fluentd.sh
+    #   env:
+    #     - CACHE_NAME=fluentd
+    # - name: "Building sindan-visualization (with build-time secret option)"
+    #   script: bash .travis/test_building_visualization.sh
+    #   env:
+    #     - CACHE_NAME=visualization
+
+    - stage: "Test: building 1/2"
       name: "Building sindan-fluentd"
       script: bash .travis/test_building_fluentd.sh
       env:
         - CACHE_NAME=fluentd
-    - name: "Building sindan-visualization (with build-time secret option)"
+
+    - stage: "Test: building 2/2"
+      name: "Building sindan-visualization (with build-time secret option)"
       script: bash .travis/test_building_visualization.sh
       env:
         - CACHE_NAME=visualization
