@@ -1,4 +1,4 @@
-FROM fluent/fluentd:v1.6-1
+FROM fluent/fluentd:v1.10-1
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 
 ENV LANG C.UTF-8
