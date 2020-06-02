@@ -25,6 +25,11 @@ install:
 
 jobs:
   include:
+
+    #
+    ## Could not download cache
+    ## See: https://travis-ci.org/github/SINDAN/sindan-docker/jobs/693826772#L191
+    #
     # - stage: "Test: building"
     #   name: "Building sindan-fluentd"
     #   script: bash .travis/test_building_fluentd.sh
@@ -38,14 +43,10 @@ jobs:
     - stage: "Test: building 1/2"
       name: "Building sindan-fluentd"
       script: bash .travis/test_building_fluentd.sh
-      env:
-        - CACHE_NAME=fluentd
 
     - stage: "Test: building 2/2"
       name: "Building sindan-visualization (with build-time secret option)"
       script: bash .travis/test_building_visualization.sh
-      env:
-        - CACHE_NAME=visualization
 
     - stage: "Test: initializing and running"
       name: "Initialize database and start rails app with fluentd"
