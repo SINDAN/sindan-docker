@@ -10,7 +10,7 @@ services:
   - docker
 
 cache:
-  # apt: true
+  apt: true
   directories:
     - docker-fluentd
     - docker-visualization
@@ -26,10 +26,12 @@ install:
 
 jobs:
   include:
-    - stage: "Test: building"
+    - stage: "Test: building sindan-fluentd"
       name: "Building sindan-fluentd"
       script: bash .travis/test_building_fluentd.sh
-    - name: "Building sindan-visualization (with build-time secret option)"
+
+    - stage: "Test: building sindan-visualization"
+      name: "Building sindan-visualization (with build-time secret option)"
       script: bash .travis/test_building_visualization.sh
 
     - stage: "Test: initializing and running"
