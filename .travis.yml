@@ -12,7 +12,8 @@ services:
 cache:
   apt: true
   directories:
-    - docker
+    - docker-fluentd
+    - docker-visualization
 
 install:
   - bash .travis/install_docker.sh
@@ -34,24 +35,24 @@ jobs:
     - stage: "Test: initializing and running"
       name: "Initialize database and start rails app with fluentd"
       script:
-        - ls -al docker
-        - gzip -dc docker/fluentd.tar.gz | docker load
-        - gzip -dc docker/visualization.tar.gz | docker load
+        - ls -al docker-fluentd docker-visualization
+        - gzip -dc docker-fluentd/image.tar.gz | docker load
+        - gzip -dc docker-visualization/image.tar.gz | docker load
         - bash .travis/test_initializing.sh
         - bash .travis/test_running.sh
 
     - stage: "Deploy:"
       name: "Deploy to DockerHub"
       script:
-        - ls -al docker
-        - gzip -dc docker/fluentd.tar.gz | docker load
-        - gzip -dc docker/visualization.tar.gz | docker load
+        - ls -al docker-fluentd docker-visualization
+        - gzip -dc docker-fluentd/image.tar.gz | docker load
+        - gzip -dc docker-visualization/image.tar.gz | docker load
         - bash .travis/deploy_dockerhub.sh
     - name: "Deploy to GitHub Package Registry"
       script:
-        - ls -al docker
-        - gzip -dc docker/fluentd.tar.gz | docker load
-        - gzip -dc docker/visualization.tar.gz | docker load
+        - ls -al docker-fluentd docker-visualization
+        - gzip -dc docker-fluentd/image.tar.gz | docker load
+        - gzip -dc docker-visualization/image.tar.gz | docker load
         - bash .travis/deploy_github.sh
 
 env:
