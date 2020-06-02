@@ -1,0 +1,2009 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 2,
+  "iteration": 1584003521133,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"v4rtt_srv_max\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4rtt_srv_max\" and\n  target = \"$target_v4rtt_srv\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"v4rtt_srv_ave\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4rtt_srv_ave\" and\n  target = \"$target_v4rtt_srv\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"v4rtt_srv_min\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4rtt_srv_min\" and\n  target = \"$target_v4rtt_srv\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "v4rtt_srv of $target_v4rtt_srv",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 AS \"v6rtt_srv_max\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6rtt_srv_max\" and\n  target = \"$target_v6rtt_srv\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 AS \"v6rtt_srv_ave\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6rtt_srv_ave\" and\n  target = \"$target_v6rtt_srv\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 AS \"v6rtt_srv_min\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6rtt_srv_min\" and\n  target = \"$target_v6rtt_srv\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "v6rtt_srv of $target_v6rtt_srv",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 5
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"AAAA_dual\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4dnsrtt_AAAA_dual.sindan-net.com\" and\n  target = \"8.8.8.8\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"AAAA_ipv4\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4dnsrtt_AAAA_ipv4.sindan-net.com\" and\n  target = \"8.8.8.8\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"AAAA_ipv6\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4dnsrtt_AAAA_ipv6.sindan-net.com\" and\n  target = \"8.8.8.8\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"A_dual\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4dnsrtt_A_dual.sindan-net.com\" and\n  target = \"8.8.8.8\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"A_ipv4\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4dnsrtt_A_ipv4.sindan-net.com\" and\n  target = \"8.8.8.8\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "E",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"A_ipv6\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4dnsrtt_A_ipv6.sindan-net.com\" and\n  target = \"8.8.8.8\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "F",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "v4dnsrtt of GPDNS4",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 12,
+        "y": 5
+      },
+      "hiddenSeries": false,
+      "id": 8,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"AAAA_dual\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6dnsrtt_AAAA_dual.sindan-net.com\" and\n  target = \"2001:4860:4860::8888\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"AAAA_ipv4\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6dnsrtt_AAAA_ipv4.sindan-net.com\" and\n  target = \"2001:4860:4860::8888\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"AAAA_ipv6\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6dnsrtt_AAAA_ipv6.sindan-net.com\" and\n  target = \"2001:4860:4860::8888\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"A_dual\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6dnsrtt_A_dual.sindan-net.com\" and\n  target = \"2001:4860:4860::8888\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "D",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"A_ipv4\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6dnsrtt_A_ipv4.sindan-net.com\" and\n  target = \"2001:4860:4860::8888\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "E",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"A_ipv6\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6dnsrtt_A_ipv6.sindan-net.com\" and\n  target = \"2001:4860:4860::8888\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "F",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "v6dnsrtt of GPDNS6",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pluginVersion": "6.6.2",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"GPDNS4(1.1.1.1)\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4pmtu_srv\" and\n  target = \"1.1.1.1\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"GPDNS4(8.8.8.8)\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4pmtu_srv\" and\n  target = \"8.8.8.8\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"sh.wide.ad.jp\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4pmtu_srv\" and\n  target = \"203.178.139.60\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "p4pmtu_srv",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 16,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"GPDNS6(::1111)\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6pmtu_srv\" and\n  target = \"2606:4700:4700::1111\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"GPDNS6(::8888)\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6pmtu_srv\" and\n  target = \"2001:4860:4860::8888\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"sh.wide.ad.jp\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6pmtu_srv\" and\n  target = \"2001:200:0:180c::6\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "v6pmtu_srv",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 2,
+        "w": 12,
+        "x": 12,
+        "y": 10
+      },
+      "hiddenSeries": false,
+      "id": 22,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0 as \"www.yahoo.co.jp\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v4http_srv\" and\n  target = \"$target_v4http_srv\"",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "v4http_srv of $target_v4http_srv",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 2,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "hiddenSeries": false,
+      "id": 24,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": false,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0 as \"www.google.co.jp\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"v6http_srv\" and\n  target = \"$target_v6http_srv\"",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "v6http_srv of $target_v6http_srv",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "SNR": "blue"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "sindan-mysql",
+      "description": "SNR should be 20 or more for a data network.",
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 8,
+        "x": 0,
+        "y": 14
+      },
+      "hiddenSeries": false,
+      "id": 12,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 2,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/(rssi|noise)/",
+          "lines": true,
+          "zindex": 3
+        },
+        {
+          "alias": "SNR",
+          "bars": true,
+          "yaxis": 2,
+          "zindex": -3
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"rssi\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"rssi\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"noise\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"noise\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "B",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        },
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  a.occurred_at AS \"time\",\n  (a.detail+0.0) - (b.detail+0.0) AS \"SNR\"\nFROM\n  (\n  SELECT log_campaign_uuid, occurred_at, detail\n  FROM diagnosis_logs\n  WHERE\n    $__timeFilter(occurred_at) AND\n    log_type = \"RSSI\" AND\n    log_campaign_uuid in (\n      SELECT log_campaign_uuid\n      FROM log_campaigns\n      WHERE mac_addr = \"$sindanClientID\"\n    )\n  ) AS a\nLEFT JOIN\n  (\n  SELECT log_campaign_uuid, occurred_at, detail\n  FROM diagnosis_logs\n  WHERE\n    $__timeFilter(occurred_at) AND\n    log_type = \"noise\" AND\n    log_campaign_uuid in (\n      SELECT log_campaign_uuid\n      FROM log_campaigns\n      WHERE mac_addr = \"$sindanClientID\"\n    )\n  ) As b\nON a.log_campaign_uuid = b.log_campaign_uuid",
+          "refId": "C",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "WiFi Status",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": null,
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": "50",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "sindan-mysql",
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 8,
+        "y": 14
+      },
+      "id": 10,
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 0,
+            "min": -100,
+            "thresholds": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": -80
+              },
+              {
+                "color": "#EAB839",
+                "value": -70
+              },
+              {
+                "color": "green",
+                "value": -67
+              },
+              {
+                "color": "#6ED0E0",
+                "value": -30
+              }
+            ],
+            "unit": "dBm"
+          },
+          "override": {},
+          "overrides": [],
+          "values": false
+        },
+        "orientation": "auto",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "6.5.0",
+      "targets": [
+        {
+          "format": "time_series",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  detail+0.0 as \"RSSI\"\nFROM diagnosis_logs\nWHERE\n  $__timeFilter(occurred_at) and\n  log_type = \"rssi\" and\n  log_campaign_uuid in (\n    select\n      log_campaign_uuid\n    from log_campaigns\n    where mac_addr = \"$sindanClientID\" )\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "id"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "table": "diagnosis_logs",
+          "timeColumn": "occurred_at",
+          "timeColumnType": "timestamp",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "RSSI",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "columns": [],
+      "datasource": "sindan-mysql",
+      "fontSize": "80%",
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 14
+      },
+      "id": 20,
+      "links": [],
+      "options": {},
+      "pageSize": null,
+      "pluginVersion": "6.6.2",
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Time",
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "pattern": "time",
+          "type": "date"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "/.*/",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "format": "table",
+          "group": [],
+          "metricColumn": "none",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  occurred_at AS \"time\",\n  mac_addr AS \"sindanClientID\"\nFROM log_campaigns\nWHERE\n  $__timeFilter(occurred_at)\nORDER BY occurred_at",
+          "refId": "A",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "column"
+              }
+            ]
+          ],
+          "timeColumn": "time",
+          "where": [
+            {
+              "name": "$__timeFilter",
+              "params": [],
+              "type": "macro"
+            }
+          ]
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Latest Campaign",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "dashboardFilter": "",
+      "dashboardTags": [],
+      "datasource": "sindan_mysql",
+      "folderId": null,
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 14
+      },
+      "id": 18,
+      "limit": 10,
+      "nameFilter": "",
+      "onlyAlertsOnDashboard": false,
+      "options": {},
+      "show": "current",
+      "sortOrder": 1,
+      "stateFilter": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Alert",
+      "type": "alertlist"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 21,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "00:22:cf:e3:45:fa",
+          "value": "00:22:cf:e3:45:fa"
+        },
+        "datasource": "sindan-mysql",
+        "definition": "SELECT distinct(mac_addr) FROM log_campaigns ORDER BY mac_addr;",
+        "hide": 0,
+        "includeAll": false,
+        "label": "node_id",
+        "multi": false,
+        "name": "sindanClientID",
+        "options": [],
+        "query": "SELECT distinct(mac_addr) FROM log_campaigns ORDER BY mac_addr;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "tags": [],
+          "text": "www.wide.ad.jp",
+          "value": "www.wide.ad.jp"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "v4rtt_srv",
+        "multi": false,
+        "name": "target_v4rtt_srv",
+        "options": [
+          {
+            "selected": false,
+            "text": "www.yahoo.co.jp",
+            "value": "www.yahoo.co.jp"
+          },
+          {
+            "selected": true,
+            "text": "www.wide.ad.jp",
+            "value": "www.wide.ad.jp"
+          }
+        ],
+        "query": "www.yahoo.co.jp, www.wide.ad.jp",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "www.wide.ad.jp",
+          "value": "www.wide.ad.jp"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "v6rtt_srv",
+        "multi": false,
+        "name": "target_v6rtt_srv",
+        "options": [
+          {
+            "selected": false,
+            "text": "www.google.co.jp",
+            "value": "www.google.co.jp"
+          },
+          {
+            "selected": true,
+            "text": "www.wide.ad.jp",
+            "value": "www.wide.ad.jp"
+          }
+        ],
+        "query": "www.google.co.jp, www.wide.ad.jp",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "8.8.8.8",
+          "value": "8.8.8.8"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "v4pmtu",
+        "multi": false,
+        "name": "target_v4pmtu",
+        "options": [
+          {
+            "selected": true,
+            "text": "8.8.8.8",
+            "value": "8.8.8.8"
+          },
+          {
+            "selected": false,
+            "text": "203.178.139.60",
+            "value": "203.178.139.60"
+          }
+        ],
+        "query": "8.8.8.8, 203.178.139.60",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "2001:4860:4860::8888",
+          "value": "2001:4860:4860::8888"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "v6pmtu",
+        "multi": false,
+        "name": "target_v6pmtu",
+        "options": [
+          {
+            "selected": true,
+            "text": "2001:4860:4860::8888",
+            "value": "2001:4860:4860::8888"
+          },
+          {
+            "selected": false,
+            "text": "2001:200:0:180c::6",
+            "value": "2001:200:0:180c::6"
+          }
+        ],
+        "query": "2001:4860:4860::8888, 2001:200:0:180c::6",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "tags": [],
+          "text": "www.wide.ad.jp",
+          "value": "www.wide.ad.jp"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "v4http_srv",
+        "multi": false,
+        "name": "target_v4http_srv",
+        "options": [
+          {
+            "selected": false,
+            "text": "www.yahoo.co.jp",
+            "value": "www.yahoo.co.jp"
+          },
+          {
+            "selected": true,
+            "text": "www.wide.ad.jp",
+            "value": "www.wide.ad.jp"
+          }
+        ],
+        "query": "www.yahoo.co.jp, www.wide.ad.jp",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "www.wide.ad.jp",
+          "value": "www.wide.ad.jp"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "v6http_srv",
+        "multi": false,
+        "name": "target_v6http_srv",
+        "options": [
+          {
+            "selected": false,
+            "text": "www.google.co.jp",
+            "value": "www.google.co.jp"
+          },
+          {
+            "selected": true,
+            "text": "www.wide.ad.jp",
+            "value": "www.wide.ad.jp"
+          }
+        ],
+        "query": "www.google.co.jp, www.wide.ad.jp",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-24h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "10m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "SINDAN by fluentd.docker.local",
+  "uid": "isZjpDuZz",
+  "version": 18
+}
