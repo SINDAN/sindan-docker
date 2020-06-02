@@ -8,7 +8,8 @@ datasources:
     url: mysql:3306
     database: sindan_production
     user: sindan
-    password: %%__DB_PWD__%%
+    secureJsonData:
+      password: ${GF_MYSQL_DB_PASSWORD}
     jsonData:
       maxOpenConns: 0
       maxIdleConns: 5

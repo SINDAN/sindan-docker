@@ -1,6 +1,7 @@
 BUILDKIT_DOCKER_BUILD    = DOCKER_BUILDKIT=1 docker build
 SINDAN_FLUENTD_TAG       = sindan/fluentd:v1.6-1-rev1
 SINDAN_VISUALIZATION_TAG = sindan/visualization:2.6.3-alpine-rev1
+SINDAN_GRAFANA_TAG       = sindan/grafana:6.5.0-rev1
 
 .PHONY: all
 all: run
@@ -9,6 +10,7 @@ all: run
 lint: fluentd/Dockerfile visualization/Dockerfile
 	docker run --rm -i hadolint/hadolint < fluentd/Dockerfile || true
 	docker run --rm -i hadolint/hadolint < visualization/Dockerfile || true
+	docker run --rm -i hadolint/hadolint < grafana/Dockerfile || true
 
 .PHONY: build
 build:
@@ -20,17 +22,19 @@ build:
 		--build-arg BUILDTIME_DB_PASSWORD_FILE=/run/secrets/db_password \
 		--secret id=rails_secret,src=.secrets/rails_secret_key_base.txt \
 		--secret id=db_pass,src=.secrets/db_password.txt
-	docker-compose build grafana
+	$(BUILDKIT_DOCKER_BUILD) grafana --no-cache -t $(SINDAN_GRAFANA_TAG)
 
 .PHONY: push
 push:
 	docker push $(SINDAN_FLUENTD_TAG)
 	docker push $(SINDAN_VISUALIZATION_TAG)
+	docker push $(SINDAN_GRAFANA_TAG)
 
 .PHONY: pull
 pull:
 	docker pull $(SINDAN_FLUENTD_TAG)
 	docker pull $(SINDAN_VISUALIZATION_TAG)
+	docker pull $(SINDAN_GRAFANA_TAG)
 
 .PHONY: init
 init:
@@ -68,5 +72,7 @@ destroy:
 	docker volume rm -f $(shell basename $(CURDIR))_fluentd-data
 	docker volume rm -f $(shell basename $(CURDIR))_mysql-data
 	docker volume rm -f $(shell basename $(CURDIR))_visualization-data
+	docker volume rm -f $(shell basename $(CURDIR))_grafana-data
 	docker rmi -f $(SINDAN_FLUENTD_TAG)
 	docker rmi -f $(SINDAN_VISUALIZATION_TAG)
+	docker rmi -f $(SINDAN_GRAFANA_TAG)

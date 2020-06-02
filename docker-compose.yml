@@ -99,7 +99,7 @@ services:
       com.sindan-net.description: "Web frontend to manage diagnosis logs"
 
   grafana:
-    image: sindan/grafana:6.5.0
+    image: sindan/grafana:6.5.0-rev1
     build:
       context: ./grafana
     hostname: sindan-grafana
@@ -108,11 +108,24 @@ services:
       - mysql
     ports:
       - "3001:3000"
+    secrets:
+      - db_password
+      - gf_user
+      - gf_password
+    logging: *default-logging
     environment:
-      - GF_PATHS_CONFIG=/etc/grafana/config.ini
-      - GF_INSTALL_PLUGINS=grafana-clock-panel
+      GF_PATHS_CONFIG: "/etc/grafana/config.ini"
+      GF_INSTALL_PLUGINS: "grafana-clock-panel"
+      GF_SECURITY_ADMIN_USER__FILE: "/run/secrets/gf_user"
+      GF_SECURITY_ADMIN_PASSWORD__FILE: "/run/secrets/gf_password"
+    healthcheck:
+      <<: *default-healthcheck
+      test: wget --spider http://127.0.0.1:3000/api/health || exit 1
+      timeout: "2s"
     volumes:
       - grafana-data:/var/lib/grafana
+    labels:
+      com.sindan-net.description: "Grafana dashboard"
 
 secrets:
   db_password:
@@ -121,6 +134,10 @@ secrets:
     file: .secrets/rails_secret_key_base.txt
   accounts:
     file: .secrets/accounts.yml
+  gf_user:
+    file: .secrets/gf_user.txt
+  gf_password:
+    file: .secrets/gf_password.txt
 
 volumes:
   fluentd-data:
