@@ -59,12 +59,14 @@ jobs:
 
     - stage: "Deploy:"
       name: "Deploy to DockerHub"
+      if: branch = master
       script:
         - ls -al docker
         - gzip -dc docker/fluentd.tar.gz | docker load
         - gzip -dc docker/visualization.tar.gz | docker load
         - bash .travis/deploy_dockerhub.sh
     - name: "Deploy to GitHub Package Registry"
+      if: branch = master
       script:
         - ls -al docker
         - gzip -dc docker/fluentd.tar.gz | docker load
