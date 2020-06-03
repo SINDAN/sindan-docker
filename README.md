@@ -7,7 +7,7 @@
 Dockerization of server-side [@SINDAN](https://github.com/SINDAN) suite
 - **[Branch: shored-master](https://github.com/SINDAN/sindan-docker/tree/shored-master)** is the previous generation maintained by [@shored](https://github.com/shored) (soon to be deprecated and removed)
 
-<a href="https://asciinema.org/a/336384?size=medium&rows=30"><img src="https://asciinema.org/a/336384.svg" /></a>
+[![asciicast](https://asciinema.org/a/336384.svg)](https://asciinema.org/a/336384)
 
 ## About SINDAN Project
 
