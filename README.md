@@ -74,7 +74,7 @@ accounts:
 
 Finally, set the Grafana's username and password to `gf_user.txt` and `gf_password.txt` respectively.
 
-### Build/Get docker imagesand initialize DB
+### Build/Get docker images and initialize DB
 
 Build dockerfile and initialize database. This might take a while.
 
