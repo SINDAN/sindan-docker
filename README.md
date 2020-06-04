@@ -7,7 +7,7 @@
 Dockerization of server-side [@SINDAN](https://github.com/SINDAN) suite
 - **[Branch: shored-master](https://github.com/SINDAN/sindan-docker/tree/shored-master)** is the previous generation maintained by [@shored](https://github.com/shored) (soon to be deprecated and removed)
 
-[![asciicast](https://asciinema.org/a/336384.svg)](https://asciinema.org/a/336384)
+[![asciicast](https://asciinema.org/a/336510.svg)](https://asciinema.org/a/336510)
 
 ## About SINDAN Project
 
@@ -75,6 +75,12 @@ accounts:
 ```
 
 Finally, set the Grafana's username and password to `gf_user.txt` and `gf_password.txt` respectively.
+
+```bash
+$ cp .secrets/gf_user.txt.example .secrets/gf_user.txt
+$ cp .secrets/gf_password.txt.example .secrets/gf_password.txt
+$ vim -p .secrets/gf_user.txt .secrets/gf_password.txt
+```
 
 ### Build/Get docker images and initialize DB
 
