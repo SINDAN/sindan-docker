@@ -43,7 +43,7 @@ init:
 	'while true; do \
 		docker-compose run visualization bundle exec rails db:migrate; \
 		(( $$? == 0 )) && break; \
-		echo -e "\n\nRetrying in 5 seconds"; sleep 5; echo; \
+		echo -e "\n\nRetrying in 5 seconds ..."; sleep 5; echo; \
 	done'
 	docker-compose run visualization bundle exec rails db:seed
 	docker-compose stop mysql visualization
@@ -56,6 +56,27 @@ run:
 .PHONY: log
 log:
 	docker-compose logs -f
+
+.PHONY: ps
+ps:
+	docker-compose ps -a
+
+.PHONY: backup
+backup:
+	docker-compose up -d mysql
+	docker-compose exec mysql /dump_database.sh | gzip > sindan_database_$(shell date +%Y-%m%d-%H%M%S).sql.gz
+
+.PHONY: restore
+restore:
+	docker-compose up -d mysql
+	bash -c \
+	'while true; do \
+		gzip -d -c restore.sql.gz | docker-compose exec -T mysql /restore_database.sh; \
+		(( $$? == 0 )) && break; \
+		echo -e "\n\nRetrying in 5 seconds ..."; sleep 5; echo; \
+	done'
+	docker-compose stop mysql
+	docker-compose rm -f
 
 .PHONY: stop
 stop:
