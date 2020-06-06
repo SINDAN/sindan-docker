@@ -61,6 +61,11 @@ log:
 ps:
 	docker-compose ps -a
 
+.PHONY: update
+update:
+	git pull origin master
+	git submodule update --init --recursive
+
 .PHONY: backup
 backup:
 	docker-compose up -d mysql
