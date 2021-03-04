@@ -68,7 +68,7 @@ services:
       com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
-    image: sindan/visualization:2.6.3-alpine-rev2
+    image: sindan/visualization:2.6.3-alpine-rev3
     build:
       context: ./visualization
       target: production
