@@ -55,7 +55,7 @@ run:
 
 .PHONY: log
 log:
-	docker-compose logs -f
+	docker-compose logs -f --tail=100
 
 .PHONY: ps
 ps:
