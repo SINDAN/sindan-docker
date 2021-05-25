@@ -61,8 +61,8 @@ services:
       test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$(cat $$MYSQL_PASSWORD_FILE)
     logging: *default-logging
     volumes:
-      - ./mysql/dump_database.sh:/dump_database.sh
-      - ./mysql/restore_database.sh:/restore_database.sh
+      - ./mysql/dump_database.sh:/dump_database.sh:ro
+      - ./mysql/restore_database.sh:/restore_database.sh:ro
       - mysql-data:/var/lib/mysql
     labels:
       com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
