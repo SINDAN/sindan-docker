@@ -73,7 +73,6 @@ services:
     depends_on:
       - mysql
     ports:
-      - "8080:8080"
       - "8888:8888"
     secrets:
       - db_password
