@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3"
 
 x-healthcheck:
   &default-healthcheck
@@ -15,6 +15,55 @@ x-logging:
     max-file: "3"
 
 services:
+  envoy:
+    image: ghcr.io/sindan/sindan-docker/envoy:latest
+    hostname: sindan-envoy
+    build:
+      context: envoy
+    restart: always
+    depends_on:
+      - visualization
+      - certbot-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      ENVOY_UID: 0
+    healthcheck:
+      <<: *default-healthcheck
+      test: wget --spider https://127.0.0.1/ || exit 1
+    logging: *default-logging
+    volumes:
+      - certbot-pem:/etc/envoy/certs:ro
+    labels:
+      com.sindan-net.sindan-envoy.description: "Front-end proxy to terminate TLS connection"
+
+  certbot:
+    image: certbot/certbot:latest
+    hostname: sindan-certbot
+    volumes:
+      - certbot-acme:/var/www/certbot
+      - certbot-pem:/etc/letsencrypt
+    command: ["--version"]
+    labels:
+      com.sindan-net.sindan-certbot.description: "Let's Encrypt client"
+
+  certbot-nginx:
+    image: ghcr.io/sindan/sindan-docker/certbot-nginx:latest
+    hostname: sindan-certbot-nginx
+    build:
+      context: certbot-nginx
+    restart: always
+    healthcheck:
+      <<: *default-healthcheck
+      test: wget --spider https://127.0.0.1/ || exit 1
+    logging: *default-logging
+    volumes:
+      - certbot-acme:/var/www/certbot:ro
+      - certbot-pem:/etc/nginx/certs:ro
+    labels:
+      com.sindan-net.sindan-certbot-nginx.description: "Simple web server to host ACME challenge"
+
   fluentd:
     image: ghcr.io/sindan/fluentd:v1.6-1-rev2
     build:
@@ -41,7 +90,7 @@ services:
       - ./fluentd/fluent.conf:/fluentd/etc/fluent.conf
       - fluentd-data:/fluentd/log
     labels:
-      com.sindan-net.description: "Receive logs from sindan-clients and forward them to MySQL"
+      com.sindan-net.sindan-fluentd.description: "Receive logs from sindan-clients and forward them to MySQL"
 
   mysql:
     image: mysql:5.7
@@ -65,7 +114,7 @@ services:
       - ./mysql/restore_database.sh:/restore_database.sh:ro
       - mysql-data:/var/lib/mysql
     labels:
-      com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
+      com.sindan-net.sindan-mysql.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
     image: ghcr.io/sindan/visualization:2.6.3-alpine-rev4
@@ -98,7 +147,7 @@ services:
     volumes:
       - visualization-data:/app
     labels:
-      com.sindan-net.description: "Web frontend to manage diagnosis logs"
+      com.sindan-net.sindan-visualization.description: "Web frontend to manage diagnosis logs"
 
   grafana:
     image: ghcr.io/sindan/grafana:6.5.0-rev1
@@ -127,7 +176,7 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
     labels:
-      com.sindan-net.description: "Grafana dashboard"
+      com.sindan-net.sindan-grafana.description: "Grafana dashboard"
 
 secrets:
   db_password:
@@ -146,3 +195,5 @@ volumes:
   mysql-data:
   visualization-data:
   grafana-data:
+  certbot-acme:
+  certbot-pem:
