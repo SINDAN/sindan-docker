@@ -16,7 +16,7 @@ x-logging:
 
 services:
   fluentd:
-    image: sindan/fluentd:v1.6-1-rev2
+    image: ghcr.io/sindan/fluentd:v1.6-1-rev2
     build:
       context: ./fluentd
     hostname: sindan-fluentd
@@ -68,7 +68,7 @@ services:
       com.sindan-net.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
-    image: sindan/visualization:2.6.3-alpine-rev4
+    image: ghcr.io/sindan/visualization:2.6.3-alpine-rev4
     build:
       context: ./visualization
       target: production
@@ -101,7 +101,7 @@ services:
       com.sindan-net.description: "Web frontend to manage diagnosis logs"
 
   grafana:
-    image: sindan/grafana:6.5.0-rev1
+    image: ghcr.io/sindan/grafana:6.5.0-rev1
     build:
       context: ./grafana
     hostname: sindan-grafana
