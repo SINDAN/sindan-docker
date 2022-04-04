@@ -2,12 +2,12 @@
 
 # sindan-docker
 
-[![](https://travis-ci.org/SINDAN/sindan-docker.svg?branch=master)](https://travis-ci.org/SINDAN/sindan-docker) [![](http://img.shields.io/github/license/SINDAN/sindan-docker)](LICENSE) [![](https://img.shields.io/github/issues/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/issues) [![](https://img.shields.io/github/issues-pr/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/pulls) [![](https://img.shields.io/github/last-commit/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/commits) [![](https://img.shields.io/github/release/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)
+[![](http://img.shields.io/github/license/SINDAN/sindan-docker)](LICENSE) [![](https://img.shields.io/github/issues/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/issues) [![](https://img.shields.io/github/issues-pr/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/pulls) [![](https://img.shields.io/github/last-commit/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/commits) [![](https://img.shields.io/github/release/SINDAN/sindan-docker)](https://github.com/SINDAN/sindan-docker/releases)
 
 Dockerization of server-side [@SINDAN](https://github.com/SINDAN) suite
 - **[Branch: shored-master](https://github.com/SINDAN/sindan-docker/tree/shored-master)** is the previous generation maintained by [@shored](https://github.com/shored) (soon to be deprecated and removed)
 
-[![asciicast](https://asciinema.org/a/336510.svg)](https://asciinema.org/a/336510)
+<!--[![asciicast](https://asciinema.org/a/336510.svg)](https://asciinema.org/a/336510)-->
 
 ## About SINDAN Project
 
@@ -169,10 +169,6 @@ It sequencially executes *backup database*, *stop containers*, *update repositor
 ```
 $ make backup clean update pull run
 ```
-
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
