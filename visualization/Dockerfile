@@ -47,6 +47,7 @@ RUN --mount=type=secret,id=rails_secret,target=/run/secrets/rails_secret_key_bas
 
 FROM ruby:3.1.1-alpine as production
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
+LABEL org.opencontainers.image.source https://github.com/SINDAN/sindan-docker
 
 ENV LANG C.UTF-8
 ENV BUNDLE_JOBS=4

@@ -1,4 +1,5 @@
 FROM grafana/grafana:6.5.0
+LABEL org.opencontainers.image.source https://github.com/SINDAN/sindan-docker
 
 USER root
 
