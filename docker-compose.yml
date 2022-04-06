@@ -116,7 +116,7 @@ services:
       com.sindan-net.sindan-mysql.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
-    image: ghcr.io/sindan/visualization:2.6.3-alpine-rev4
+    image: ghcr.io/sindan/visualization:3.1.1-alpine-rev1
     build:
       context: ./visualization
       target: production
