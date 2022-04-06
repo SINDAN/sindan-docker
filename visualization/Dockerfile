@@ -21,8 +21,21 @@ COPY bundle-install.sh .
 
 # hadolint ignore=DL3018,DL3028
 RUN apk add --no-cache --update \
-      build-base  alpine-sdk tzdata shadow sudo ca-certificates bash \
-      nodejs busybox-suid mariadb-dev mariadb-connector-c-dev libxml2-dev libxslt-dev libstdc++ \
+      alpine-sdk \
+      bash \
+      build-base \
+      busybox-suid \
+      ca-certificates \
+      libstdc++ \
+      libxml2-dev \
+      libxslt-dev \
+      mariadb-connector-c-dev \
+      mariadb-dev \
+      nodejs \
+      shadow \
+      sudo \
+      tzdata \
+      yarn \
  && gem install bundler --no-document \
  && bundle config build.nokogiri --use-system-libraries \
  && bash bundle-install.sh
@@ -49,7 +62,13 @@ COPY seeds.rb db
 
 # hadolint ignore=DL3018,DL3028
 RUN apk add --no-cache --update \
-      libxml2-dev libxslt-dev libstdc++ tzdata nodejs mariadb-connector-c ca-certificates
+      ca-certificates \
+      libstdc++ \
+      libxml2-dev \
+      libxslt-dev \
+      mariadb-connector-c \
+      nodejs \
+      tzdata
 
 COPY --from=builder /app/vendor/bundle vendor/bundle
 COPY --from=builder /usr/local/bundle /usr/local/bundle
