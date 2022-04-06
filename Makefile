@@ -58,7 +58,6 @@ migrate:
 		(( $$? == 0 )) && break; \
 		echo -e "\n\nRetrying in 5 seconds ..."; sleep 5; echo; \
 	done'
-	docker-compose run visualization bundle exec rails db:migrate
 	docker-compose stop mysql visualization
 	docker-compose rm -f
 
