@@ -1,6 +1,6 @@
 BUILDKIT_DOCKER_BUILD    = DOCKER_BUILDKIT=1 docker build
 SINDAN_FLUENTD_TAG       = sindan/fluentd:v1.6-1-rev2
-SINDAN_VISUALIZATION_TAG = sindan/visualization:2.6.3-alpine-rev4
+SINDAN_VISUALIZATION_TAG = sindan/visualization:3.1.1-alpine-rev1
 SINDAN_GRAFANA_TAG       = sindan/grafana:6.5.0-rev1
 
 .PHONY: all
