@@ -2,6 +2,8 @@ BUILDKIT_DOCKER_BUILD    = DOCKER_BUILDKIT=1 docker build
 SINDAN_FLUENTD_TAG       = ghcr.io/sindan/sindan-docker/fluentd:v1.6-1-rev2
 SINDAN_VISUALIZATION_TAG = ghcr.io/sindan/sindan-docker/visualization:3.1.1-alpine-rev1
 SINDAN_GRAFANA_TAG       = ghcr.io/sindan/sindan-docker/grafana:6.5.0-rev1
+TLS_HOSTNAME             = sindan.sindan-net.com
+CERTBOT_ADMIN_MAIL       = sindan-wg@wide.ad.jp
 
 .PHONY: all
 all: run
@@ -35,6 +37,13 @@ pull:
 	docker pull $(SINDAN_FLUENTD_TAG)
 	docker pull $(SINDAN_VISUALIZATION_TAG)
 	docker pull $(SINDAN_GRAFANA_TAG)
+
+.PHONY: cert
+cert:
+	docker-compose up -d certbot-nginx-bootstrap
+	docker-compose run --rm certbot certonly --webroot -w /var/www/certbot -d $(TLS_HOSTNAME) --non-interactive --agree-tos -m $(CERTBOT_ADMIN_MAIL) --dry-run
+	docker-compose stop certbot-nginx-bootstrap
+	docker-compose rm -f
 
 .PHONY: init
 init:

@@ -49,6 +49,7 @@ services:
       com.sindan-net.sindan-certbot.description: "Let's Encrypt client"
 
   certbot-nginx:
+    &certbot-nginx
     image: ghcr.io/sindan/sindan-docker/certbot-nginx:latest
     hostname: sindan-certbot-nginx
     build:
@@ -64,8 +65,13 @@ services:
     labels:
       com.sindan-net.sindan-certbot-nginx.description: "Simple web server to host ACME challenge"
 
+  certbot-nginx-bootstrap:
+    <<: *certbot-nginx
+    ports:
+      - "80:80"
+
   fluentd:
-    image: ghcr.io/sindan/fluentd:v1.6-1-rev2
+    image: ghcr.io/sindan/sindan-docker/fluentd:v1.6-1-rev2
     build:
       context: ./fluentd
     hostname: sindan-fluentd
@@ -116,7 +122,7 @@ services:
       com.sindan-net.sindan-mysql.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
-    image: ghcr.io/sindan/visualization:3.1.1-alpine-rev1
+    image: ghcr.io/sindan/sindan-docker/visualization:3.1.1-alpine-rev1
     build:
       context: ./visualization
       target: production
@@ -149,7 +155,7 @@ services:
       com.sindan-net.sindan-visualization.description: "Web frontend to manage diagnosis logs"
 
   grafana:
-    image: ghcr.io/sindan/grafana:6.5.0-rev1
+    image: ghcr.io/sindan/sindan-docker/grafana:6.5.0-rev1
     build:
       context: ./grafana
     hostname: sindan-grafana
