@@ -2,6 +2,8 @@ BUILDKIT_DOCKER_BUILD    = DOCKER_BUILDKIT=1 docker build
 SINDAN_FLUENTD_TAG       = ghcr.io/sindan/sindan-docker/fluentd:v1.6-1-rev2
 SINDAN_VISUALIZATION_TAG = ghcr.io/sindan/sindan-docker/visualization:3.1.1-alpine-rev1
 SINDAN_GRAFANA_TAG       = ghcr.io/sindan/sindan-docker/grafana:6.5.0-rev1
+SINDAN_ENVOY_TAG         = ghcr.io/sindan/sindan-docker/envoy:latest
+SINDAN_CERTBOT_NGINX_TAG = ghcr.io/sindan/sindan-docker/certbot-nginx:latest
 TLS_HOSTNAME             = sindan.sindan-net.com
 CERTBOT_ADMIN_MAIL       = sindan-wg@wide.ad.jp
 
@@ -13,6 +15,8 @@ lint: fluentd/Dockerfile visualization/Dockerfile
 	docker run --rm -i hadolint/hadolint < fluentd/Dockerfile || true
 	docker run --rm -i hadolint/hadolint < visualization/Dockerfile || true
 	docker run --rm -i hadolint/hadolint < grafana/Dockerfile || true
+	docker run --rm -i hadolint/hadolint < envoy/Dockerfile || true
+	docker run --rm -i hadolint/hadolint < certbot-nginx/Dockerfile || true
 
 .PHONY: build
 build:
@@ -25,18 +29,24 @@ build:
 		--secret id=rails_secret,src=.secrets/rails_secret_key_base.txt \
 		--secret id=db_pass,src=.secrets/db_password.txt
 	$(BUILDKIT_DOCKER_BUILD) grafana --no-cache -t $(SINDAN_GRAFANA_TAG)
+	$(BUILDKIT_DOCKER_BUILD) envoy --no-cache -t $(SINDAN_ENVOY_TAG)
+	$(BUILDKIT_DOCKER_BUILD) certbot-nginx --no-cache -t $(SINDAN_CERTBOT_NGINX_TAG)
 
 .PHONY: push
 push:
 	docker push $(SINDAN_FLUENTD_TAG)
 	docker push $(SINDAN_VISUALIZATION_TAG)
 	docker push $(SINDAN_GRAFANA_TAG)
+	docker push $(SINDAN_ENVOY_TAG)
+	docker push $(SINDAN_CERTBOT_NGINX_TAG)
 
 .PHONY: pull
 pull:
 	docker pull $(SINDAN_FLUENTD_TAG)
 	docker pull $(SINDAN_VISUALIZATION_TAG)
 	docker pull $(SINDAN_GRAFANA_TAG)
+	docker pull $(SINDAN_ENVOY_TAG)
+	docker pull $(SINDAN_CERTBOT_NGINX_TAG)
 
 .PHONY: cert
 cert:
@@ -72,7 +82,11 @@ migrate:
 
 .PHONY: run
 run:
-	docker-compose up -d
+	docker-compose up -d fluentd mysql visualization grafana
+
+.PHONY: runtls
+runtls:
+	docker-compose up -d fluentd mysql visualization grafana envoy certbot-nginx
 
 .PHONY: log
 log:
@@ -120,6 +134,10 @@ destroy:
 	docker volume rm -f $(shell basename $(CURDIR))_mysql-data
 	docker volume rm -f $(shell basename $(CURDIR))_visualization-data
 	docker volume rm -f $(shell basename $(CURDIR))_grafana-data
+	docker volume rm -f $(shell basename $(CURDIR))_certbot-acme
+	docker volume rm -f $(shell basename $(CURDIR))_certbot-pem
 	docker rmi -f $(SINDAN_FLUENTD_TAG)
 	docker rmi -f $(SINDAN_VISUALIZATION_TAG)
 	docker rmi -f $(SINDAN_GRAFANA_TAG)
+	docker rmi -f $(SINDAN_ENVOY_TAG)
+	docker rmi -f $(SINDAN_CERTBOT_NGINX_TAG)
