@@ -122,7 +122,7 @@ services:
       com.sindan-net.sindan-mysql.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
-    image: ghcr.io/sindan/sindan-docker/visualization:3.1.1-alpine-rev1
+    image: ghcr.io/sindan/sindan-docker/visualization:3.1.2-alpine-rev1
     build:
       context: ./visualization
       target: production
