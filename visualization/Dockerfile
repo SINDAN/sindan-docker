@@ -38,7 +38,8 @@ RUN apk add --no-cache --update \
       yarn \
  && gem install bundler --no-document \
  && bundle config build.nokogiri --use-system-libraries \
- && bash bundle-install.sh
+ && bash bundle-install.sh \
+ && yarn install
 
 # hadolint ignore=SC2215
 RUN --mount=type=secret,id=rails_secret,target=/run/secrets/rails_secret_key_base,required \
@@ -53,6 +54,7 @@ ENV LANG C.UTF-8
 ENV BUNDLE_JOBS=4
 ENV TZ=Asia/Tokyo
 ENV RAILS_ENV=production
+ENV RAILS_SERVE_STATIC_FILES=true
 
 WORKDIR /app
 
@@ -68,11 +70,11 @@ RUN apk add --no-cache --update \
       libxml2-dev \
       libxslt-dev \
       mariadb-connector-c \
-      nodejs \
       tzdata
 
-COPY --from=builder /app/vendor/bundle vendor/bundle
+COPY --from=builder /app/vendor/bundle /app/vendor/bundle
 COPY --from=builder /usr/local/bundle /usr/local/bundle
 COPY --from=builder /app/public/assets /app/public/assets
+COPY --from=builder /app/app/assets/builds /app/app/assets/builds
 
 EXPOSE 3000
