@@ -1,4 +1,4 @@
-FROM envoyproxy/envoy:v1.21-latest
+FROM envoyproxy/envoy:v1.26-latest
 LABEL maintainer "SINDAN WG <sindan-wg@wide.ad.jp>"
 LABEL org.opencontainers.image.source https://github.com/SINDAN/sindan-docker
 

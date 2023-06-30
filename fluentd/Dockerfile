@@ -1,4 +1,4 @@
-FROM fluent/fluentd:v1.10-1
+FROM fluent/fluentd:v1.14
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 LABEL org.opencontainers.image.source https://github.com/SINDAN/sindan-docker
 
