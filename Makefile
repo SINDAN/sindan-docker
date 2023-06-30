@@ -1,7 +1,7 @@
 BUILDKIT_DOCKER_BUILD    = DOCKER_BUILDKIT=1 docker build
-SINDAN_FLUENTD_TAG       = ghcr.io/sindan/sindan-docker/fluentd:v1.6-1-rev2
-SINDAN_VISUALIZATION_TAG = ghcr.io/sindan/sindan-docker/visualization:3.1.2-alpine-rev1
-SINDAN_GRAFANA_TAG       = ghcr.io/sindan/sindan-docker/grafana:6.5.0-rev1
+SINDAN_FLUENTD_TAG       = ghcr.io/sindan/sindan-docker/fluentd:v1.14-rev1
+SINDAN_VISUALIZATION_TAG = ghcr.io/sindan/sindan-docker/visualization:3.2.2-alpine-rev1
+SINDAN_GRAFANA_TAG       = ghcr.io/sindan/sindan-docker/grafana:10.0.1-rev1
 SINDAN_ENVOY_TAG         = ghcr.io/sindan/sindan-docker/envoy:latest
 SINDAN_CERTBOT_NGINX_TAG = ghcr.io/sindan/sindan-docker/certbot-nginx:latest
 TLS_HOSTNAME             = sindan.sindan-net.com
