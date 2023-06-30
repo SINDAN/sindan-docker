@@ -98,7 +98,7 @@ services:
       com.sindan-net.sindan-fluentd.description: "Receive logs from sindan-clients and forward them to MySQL"
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     hostname: sindan-mysql
     restart: always
     expose:
