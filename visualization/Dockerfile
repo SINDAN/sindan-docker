@@ -42,8 +42,8 @@ RUN apk add --no-cache --update \
  && yarn install
 
 # hadolint ignore=SC2215
-RUN --mount=type=secret,id=rails_secret,target=/run/secrets/rails_secret_key_base,required \
-    --mount=type=secret,id=db_pass,target=/run/secrets/db_password,required \
+RUN --mount=type=secret,id=rails_secret_key_base,target=/run/secrets/rails_secret_key_base,required \
+    --mount=type=secret,id=db_password,target=/run/secrets/db_password,required \
     bundle exec rails assets:precompile
 
 FROM ruby:3.2.2-alpine as production
