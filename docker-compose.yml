@@ -126,6 +126,12 @@ services:
     build:
       context: ./visualization
       target: production
+      secrets:
+        - rails_secret_key_base
+        - db_password
+      args:
+        - BUILDTIME_RAILS_SECRETKEY_FILE=/run/secrets/rails_secret_key_base
+        - BUILDTIME_DB_PASSWORD_FILE=/run/secrets/db_password
     hostname: sindan-visualization
     restart: always
     depends_on:
