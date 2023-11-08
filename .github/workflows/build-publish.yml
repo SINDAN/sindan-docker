@@ -44,7 +44,8 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/visualization
           tags: |
             # set latest tag for default branch
-            type=raw,value=latest,enable={{is_default_branch}}
+            #type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=test
 
       - name: Build and push Docker image (visualization)
         uses: docker/build-push-action@v5
