@@ -14,8 +14,7 @@ ENV RAILS_ENV=production
 WORKDIR /app
 
 COPY sindan-visualization/. .
-COPY database.yml config
-COPY secrets.yml config
+COPY database.dummy.yml config/database.yml
 COPY seeds.rb db
 COPY bundle-install.sh .
 
@@ -35,16 +34,14 @@ RUN apk add --no-cache --update \
       shadow \
       sudo \
       tzdata \
-      yarn \
- && gem install bundler --no-document \
- && bundle config build.nokogiri --use-system-libraries \
- && bash bundle-install.sh \
- && yarn install
+      yarn
+RUN bash bundle-install.sh
+RUN yarn install
 
 # hadolint ignore=SC2215
-RUN --mount=type=secret,id=rails_secret_key_base,target=/run/secrets/rails_secret_key_base,required \
-    --mount=type=secret,id=db_password,target=/run/secrets/db_password,required \
-    bundle exec rails assets:precompile
+RUN --mount=type=secret,id=rails_secret_key_base,target=/run/secrets/rails_secret_key_base \
+    --mount=type=secret,id=db_password,target=/run/secrets/db_password
+RUN SECRET_KEY_BASE=DUMMY bundle exec rails assets:precompile
 
 FROM ruby:3.2.2-alpine as production
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
