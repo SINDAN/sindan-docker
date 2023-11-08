@@ -97,7 +97,7 @@ $ cp .secrets/rails_secret_key_base.txt.example .secrets/rails_secret_key_base.t
 $ make build init
 ```
 
-Instead of building locally, you can download pre-built images from [DockerHub](https://hub.docker.com/u/sindan).
+Instead of building locally, you can download pre-built images from [GitHub Packages](https://github.com/orgs/SINDAN/packages?repo_name=sindan-docker).
 Note that in this case, you must not edit `rails_secret_key_base.txt` as you like.
 Just follow the next:
 
