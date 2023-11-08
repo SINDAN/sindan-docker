@@ -71,7 +71,7 @@ services:
       - "80:80"
 
   fluentd:
-    image: ghcr.io/sindan/sindan-docker/fluentd:v1.6-1-rev2
+    image: ghcr.io/sindan/sindan-docker/fluentd:latest
     build:
       context: ./fluentd
     hostname: sindan-fluentd
@@ -122,7 +122,7 @@ services:
       com.sindan-net.sindan-mysql.description: "Storing diagnosis logs for sindan-visualization"
 
   visualization:
-    image: ghcr.io/sindan/sindan-docker/visualization:3.1.2-alpine-rev1
+    image: ghcr.io/sindan/sindan-docker/visualization:latest
     build:
       context: ./visualization
       target: production
@@ -161,7 +161,7 @@ services:
       com.sindan-net.sindan-visualization.description: "Web frontend to manage diagnosis logs"
 
   grafana:
-    image: ghcr.io/sindan/sindan-docker/grafana:6.5.0-rev1
+    image: ghcr.io/sindan/sindan-docker/grafana:latest
     build:
       context: ./grafana
     hostname: sindan-grafana
