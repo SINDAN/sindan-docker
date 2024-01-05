@@ -41,7 +41,7 @@ RUN yarn install
 # hadolint ignore=SC2215
 RUN --mount=type=secret,id=rails_secret_key_base,target=/run/secrets/rails_secret_key_base \
     --mount=type=secret,id=db_password,target=/run/secrets/db_password
-RUN SECRET_KEY_BASE=DUMMY bundle exec rails assets:precompile
+RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 FROM ruby:3.3.0-alpine as production
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
@@ -51,7 +51,7 @@ ENV LANG C.UTF-8
 ENV BUNDLE_JOBS=4
 ENV TZ=Asia/Tokyo
 ENV RAILS_ENV=production
-ENV RAILS_SERVE_STATIC_FILES=true
+ENV RAILS_LOG_LEVEL=debug
 
 WORKDIR /app
 
