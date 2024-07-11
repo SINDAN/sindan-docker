@@ -12,5 +12,4 @@ COPY ./provisioning /etc/grafana/provisioning
 COPY ./config.ini /etc/grafana/config.ini
 COPY ./dashboards /var/lib/grafana/dashboards
 
-ENTRYPOINT /entrypoint.sh
-
+ENTRYPOINT [ "/entrypoint.sh" ]
