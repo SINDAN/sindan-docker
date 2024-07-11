@@ -29,7 +29,7 @@ GNU/Make is not necessary, but it can reduce the number of commands you type.
 By default, SINDAN servers listen and wait for requests from external network at the following ports.
 Open these ports in your firewall beforehand as needed.
 
-- [ghcr.io/sindan/sindan-docker/envoy](): 80/tcp, 443/tcp
+- Caddy : 80/tcp, 443/tcp
 - [ghcr.io/sindan/sindan-docker/fluentd](https://github.com/SINDAN/sindan-docker/pkgs/container/sindan-docker%2Ffluentd): 8080/tcp, 8888/tcp
 - [ghcr.io/sindan/sindan-docker/visualization](https://github.com/SINDAN/sindan-docker/pkgs/container/sindan-docker%2Fvisualization): 3000/tcp
 - [ghcr.io/sindan/sindan-docker/grafana](https://github.com/SINDAN/sindan-docker/pkgs/container/sindan-docker%2Fgrafana): 3001/tcp
@@ -88,6 +88,15 @@ $ cp .secrets/gf_password.txt.example .secrets/gf_password.txt
 $ vim -p .secrets/gf_user.txt .secrets/gf_password.txt
 ```
 
+Also if you want to start up with https, set your service domain name.
+(You must register this domain name entry to the DNS properly.)
+
+```bash
+$ cp caddy/domain.env.example caddy/domain.env
+$ vim caddy/domain.env
+```
+
+
 ### Build/Get docker images and initialize DB
 
 Build dockerfile and initialize database. This might take a while.
@@ -112,6 +121,12 @@ Deploy containers built or pulled previous steps.
 
 ```
 $ make run log
+```
+
+If you want to start up with https:
+
+```
+$ make runtls log
 ```
 
 Open your favorite browser and go [http://localhost:3000](http://localhost:3000) to see SINDAN Web.
