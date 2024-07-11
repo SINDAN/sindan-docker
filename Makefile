@@ -2,10 +2,6 @@ BUILDKIT_DOCKER_BUILD    = DOCKER_BUILDKIT=1 docker build
 SINDAN_FLUENTD_TAG       = ghcr.io/sindan/sindan-docker/fluentd:latest
 SINDAN_VISUALIZATION_TAG = ghcr.io/sindan/sindan-docker/visualization:latest
 SINDAN_GRAFANA_TAG       = ghcr.io/sindan/sindan-docker/grafana:latest
-SINDAN_ENVOY_TAG         = ghcr.io/sindan/sindan-docker/envoy:latest
-SINDAN_CERTBOT_NGINX_TAG = ghcr.io/sindan/sindan-docker/certbot-nginx:latest
-TLS_HOSTNAME             = sindan.sindan-net.com
-CERTBOT_ADMIN_MAIL       = sindan-wg@wide.ad.jp
 
 .PHONY: all
 all: run
@@ -15,8 +11,6 @@ lint: fluentd/Dockerfile visualization/Dockerfile
 	docker run --rm -i hadolint/hadolint < fluentd/Dockerfile || true
 	docker run --rm -i hadolint/hadolint < visualization/Dockerfile || true
 	docker run --rm -i hadolint/hadolint < grafana/Dockerfile || true
-	docker run --rm -i hadolint/hadolint < envoy/Dockerfile || true
-	docker run --rm -i hadolint/hadolint < certbot-nginx/Dockerfile || true
 
 .PHONY: build
 build:
@@ -29,23 +23,12 @@ push:
 	docker push $(SINDAN_FLUENTD_TAG)
 	docker push $(SINDAN_VISUALIZATION_TAG)
 	docker push $(SINDAN_GRAFANA_TAG)
-	docker push $(SINDAN_ENVOY_TAG)
-	docker push $(SINDAN_CERTBOT_NGINX_TAG)
 
 .PHONY: pull
 pull:
 	docker pull $(SINDAN_FLUENTD_TAG)
 	docker pull $(SINDAN_VISUALIZATION_TAG)
 	docker pull $(SINDAN_GRAFANA_TAG)
-#	docker pull $(SINDAN_ENVOY_TAG)
-#	docker pull $(SINDAN_CERTBOT_NGINX_TAG)
-
-.PHONY: cert
-cert:
-	docker compose up -d certbot-nginx-bootstrap
-	docker compose run --rm certbot certonly --webroot -w /var/www/certbot -d $(TLS_HOSTNAME) --non-interactive --agree-tos -m $(CERTBOT_ADMIN_MAIL) --dry-run
-	docker compose stop certbot-nginx-bootstrap
-	docker compose rm -f
 
 .PHONY: init
 init:
@@ -126,12 +109,8 @@ destroy:
 	docker volume rm -f $(shell basename $(CURDIR))_mysql-data
 	docker volume rm -f $(shell basename $(CURDIR))_visualization-data
 	docker volume rm -f $(shell basename $(CURDIR))_grafana-data
-	docker volume rm -f $(shell basename $(CURDIR))_certbot-acme
-	docker volume rm -f $(shell basename $(CURDIR))_certbot-pem
 	docker volume rm -f $(shell basename $(CURDIR))_caddy_data
 	docker volume rm -f $(shell basename $(CURDIR))_caddy_config
 	docker rmi -f $(SINDAN_FLUENTD_TAG)
 	docker rmi -f $(SINDAN_VISUALIZATION_TAG)
 	docker rmi -f $(SINDAN_GRAFANA_TAG)
-	docker rmi -f $(SINDAN_ENVOY_TAG)
-	docker rmi -f $(SINDAN_CERTBOT_NGINX_TAG)

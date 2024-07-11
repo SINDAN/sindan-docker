@@ -130,6 +130,7 @@ $ make runtls log
 ```
 
 Open your favorite browser and go [http://localhost:3000](http://localhost:3000) to see SINDAN Web.
+(If you start up on https, look at [https://localhost:13000](https://localhost:13000).)
 
 ![Safari screenshot](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/safari.png)
 

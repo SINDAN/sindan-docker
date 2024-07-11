@@ -175,7 +175,5 @@ volumes:
   mysql-data:
   visualization-data:
   grafana-data:
-  certbot-acme:
-  certbot-pem:
   caddy_data:
   caddy_config:
