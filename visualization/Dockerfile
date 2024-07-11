@@ -9,14 +9,15 @@ ARG BUILDTIME_DB_PASSWORD_FILE
 ENV DB_PASSWORD_FILE=$BUILDTIME_DB_PASSWORD_FILE
 
 ENV BUNDLE_JOBS=4
-ENV RAILS_ENV=production
+ENV RAILS_ENV=production \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_WITHOUT="development test"
 
 WORKDIR /app
 
 COPY sindan-visualization/. .
 COPY database.dummy.yml config/database.yml
 COPY seeds.rb db
-COPY bundle-install.sh .
 
 # hadolint ignore=DL3018,DL3028
 RUN apk add --no-cache --update \
@@ -35,7 +36,7 @@ RUN apk add --no-cache --update \
       sudo \
       tzdata \
       yarn
-RUN bash bundle-install.sh
+RUN bundle install
 RUN yarn install
 
 # hadolint ignore=SC2215
@@ -50,7 +51,9 @@ LABEL org.opencontainers.image.source https://github.com/SINDAN/sindan-docker
 ENV LANG C.UTF-8
 ENV BUNDLE_JOBS=4
 ENV TZ=Asia/Tokyo
-ENV RAILS_ENV=production
+ENV RAILS_ENV=production \
+    BUNDLE_DEPLOYMENT="1" \
+    BUNDLE_WITHOUT="development test"
 ENV RAILS_LOG_LEVEL=debug
 
 WORKDIR /app
