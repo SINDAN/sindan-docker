@@ -1,5 +1,3 @@
-version: "3"
-
 x-healthcheck:
   &default-healthcheck
   interval: "5s"
