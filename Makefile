@@ -78,7 +78,7 @@ run:
 
 .PHONY: runtls
 runtls:
-	docker compose up -d fluentd mysql visualization grafana envoy certbot-nginx
+	docker compose up -d fluentd mysql visualization-noexpose grafana-noexpose caddy
 
 .PHONY: log
 log:
@@ -128,6 +128,8 @@ destroy:
 	docker volume rm -f $(shell basename $(CURDIR))_grafana-data
 	docker volume rm -f $(shell basename $(CURDIR))_certbot-acme
 	docker volume rm -f $(shell basename $(CURDIR))_certbot-pem
+	docker volume rm -f $(shell basename $(CURDIR))_caddy_data
+	docker volume rm -f $(shell basename $(CURDIR))_caddy_config
 	docker rmi -f $(SINDAN_FLUENTD_TAG)
 	docker rmi -f $(SINDAN_VISUALIZATION_TAG)
 	docker rmi -f $(SINDAN_GRAFANA_TAG)

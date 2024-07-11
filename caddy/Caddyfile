@@ -1,0 +1,11 @@
+{$DOMAIN_NAME}:13000 {
+    reverse_proxy visualization-noexpose:3000
+}
+
+{$DOMAIN_NAME}:13001 {
+    reverse_proxy grafana-noexpose:3000
+}
+
+{$DOMAIN_NAME}:18888 {
+    reverse_proxy fluentd:8888
+}
