@@ -15,60 +15,21 @@ x-logging:
     max-file: "3"
 
 services:
-  envoy:
-    image: ghcr.io/sindan/sindan-docker/envoy:latest
-    hostname: sindan-envoy
-    build:
-      context: envoy
-    restart: always
-    depends_on:
-      - visualization
-      - certbot-nginx
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy_proxy
+    env_file:
+      - ./caddy/domain.env
     ports:
+      - "13000:13000"
+      - "13001:13001"
+      - "18888:18888"
       - "80:80"
       - "443:443"
-    environment:
-      ENVOY_UID: 0
-    healthcheck:
-      <<: *default-healthcheck
-      test: wget --spider https://127.0.0.1/ || exit 1
-    logging: *default-logging
     volumes:
-      - certbot-pem:/etc/envoy/certs:ro
-    labels:
-      com.sindan-net.sindan-envoy.description: "Front-end proxy to terminate TLS connection"
-
-  certbot:
-    image: certbot/certbot:latest
-    hostname: sindan-certbot
-    volumes:
-      - certbot-acme:/var/www/certbot
-      - certbot-pem:/etc/letsencrypt
-    command: ["--version"]
-    labels:
-      com.sindan-net.sindan-certbot.description: "Let's Encrypt client"
-
-  certbot-nginx:
-    &certbot-nginx
-    image: ghcr.io/sindan/sindan-docker/certbot-nginx:latest
-    hostname: sindan-certbot-nginx
-    build:
-      context: certbot-nginx
-    restart: always
-    healthcheck:
-      <<: *default-healthcheck
-      test: wget --spider https://127.0.0.1/ || exit 1
-    logging: *default-logging
-    volumes:
-      - certbot-acme:/var/www/certbot:ro
-      - certbot-pem:/etc/nginx/certs:ro
-    labels:
-      com.sindan-net.sindan-certbot-nginx.description: "Simple web server to host ACME challenge"
-
-  certbot-nginx-bootstrap:
-    <<: *certbot-nginx
-    ports:
-      - "80:80"
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
 
   fluentd:
     image: ghcr.io/sindan/sindan-docker/fluentd:latest
@@ -121,7 +82,7 @@ services:
     labels:
       com.sindan-net.sindan-mysql.description: "Storing diagnosis logs for sindan-visualization"
 
-  visualization:
+  visualization: &visualization
     image: ghcr.io/sindan/sindan-docker/visualization:latest
     build:
       context: ./visualization
@@ -160,7 +121,11 @@ services:
     labels:
       com.sindan-net.sindan-visualization.description: "Web frontend to manage diagnosis logs"
 
-  grafana:
+  visualization-noexpose:
+    <<: *visualization
+    ports: []
+
+  grafana: &grafana
     image: ghcr.io/sindan/sindan-docker/grafana:latest
     build:
       context: ./grafana
@@ -189,6 +154,10 @@ services:
     labels:
       com.sindan-net.sindan-grafana.description: "Grafana dashboard"
 
+  grafana-noexpose:
+    <<: *grafana
+    ports: []
+
 secrets:
   db_password:
     file: .secrets/db_password.txt
@@ -206,5 +175,5 @@ volumes:
   mysql-data:
   visualization-data:
   grafana-data:
-  certbot-acme:
-  certbot-pem:
+  caddy_data:
+  caddy_config:
