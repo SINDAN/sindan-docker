@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM ruby:3.3.0-alpine as builder
+FROM ruby:3.3.4-alpine as builder
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 
 ARG BUILDTIME_RAILS_SECRETKEY_FILE
@@ -45,7 +45,7 @@ RUN --mount=type=secret,id=rails_secret_key_base,target=/run/secrets/rails_secre
     --mount=type=secret,id=db_password,target=/run/secrets/db_password
 RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
-FROM ruby:3.3.0-alpine as production
+FROM ruby:3.3.4-alpine as production
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 LABEL org.opencontainers.image.source https://github.com/SINDAN/sindan-docker
 
