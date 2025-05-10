@@ -2,7 +2,7 @@ x-healthcheck:
   &default-healthcheck
   interval: "5s"
   timeout: "1s"
-  retries: 3
+  retries: "30"
   start_period: "20s"
 
 x-logging:
@@ -36,7 +36,8 @@ services:
     hostname: sindan-fluentd
     restart: always
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     ports:
       - "8888:8888"
     secrets:
@@ -94,7 +95,8 @@ services:
     hostname: sindan-visualization
     restart: always
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     ports:
       - "3000:3000"
     secrets:
@@ -130,7 +132,8 @@ services:
     hostname: sindan-grafana
     restart: always
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     ports:
       - "3001:3000"
     secrets:

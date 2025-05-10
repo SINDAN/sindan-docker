@@ -33,25 +33,15 @@ pull:
 .PHONY: init
 init:
 	docker compose up -d mysql
-	bash -c \
-	'while true; do \
-		docker compose run visualization bundle exec rails db:migrate; \
-		(( $$? == 0 )) && break; \
-		echo -e "\n\nRetrying in 5 seconds ..."; sleep 5; echo; \
-	done'
-	docker compose run visualization bundle exec rails db:seed
+	docker compose run --rm visualization bundle exec rails db:migrate
+	docker compose run --rm visualization bundle exec rails db:seed
 	docker compose stop mysql visualization
 	docker compose rm -f
 
 .PHONY: migrate
 migrate:
 	docker compose up -d mysql visualization
-	bash -c \
-	'while true; do \
-		docker compose run visualization bundle exec rails db:migrate; \
-		(( $$? == 0 )) && break; \
-		echo -e "\n\nRetrying in 5 seconds ..."; sleep 5; echo; \
-	done'
+	docker compose run --rm visualization bundle exec rails db:migrate
 	docker compose stop mysql visualization
 	docker compose rm -f
 
