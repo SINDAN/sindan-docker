@@ -135,6 +135,7 @@ Open your favorite browser and go [http://localhost:3000](http://localhost:3000)
 ![Safari screenshot](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/safari.png)
 
 You can also access [Grafana](https://grafana.com/) with [http://localhost:3001](http://localhost:3001).
+(If you start up on https, look at [https://localhost:13001](https://localhost:13001).)
 The screenshot will be added later.
 
 <!-- ![screenshot of SINDAN Grafana](https://raw.githubusercontent.com/SINDAN/sindan-docker/screenshot/grafana.png) -->
