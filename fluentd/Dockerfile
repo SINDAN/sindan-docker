@@ -10,6 +10,7 @@ USER root
 RUN apk add --no-cache --update mariadb-connector-c \
  && apk add --no-cache --update --virtual .build-deps \
       build-base ruby-dev mariadb-dev mariadb-connector-c \
+ && gem install multi_json -v 1.15.0 \
  && gem install fluent-plugin-http-heartbeat \
  && gem install fluent-plugin-mysql \
  && gem sources --clear-all \
