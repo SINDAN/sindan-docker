@@ -44,7 +44,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image (visualization)
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./visualization
           #file: ./visualization/Dockerfile
@@ -79,7 +79,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image (fluentd)
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./fluentd
           push: ${{ github.event_name != 'pull_request' }}
@@ -113,7 +113,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image (grafana)
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./grafana
           push: ${{ github.event_name != 'pull_request' }}
