@@ -33,6 +33,7 @@ pull:
 .PHONY: init
 init:
 	docker compose up -d mysql
+	docker compose run --rm visualization bundle exec rails credentials:edit
 	docker compose run --rm visualization bundle exec rails db:migrate
 	docker compose run --rm visualization bundle exec rails db:seed
 	docker compose stop mysql visualization
