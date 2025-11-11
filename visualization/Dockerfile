@@ -2,9 +2,6 @@
 FROM ruby:3.3.4-alpine as builder
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 
-ARG BUILDTIME_RAILS_SECRETKEY_FILE
-ENV RAILS_SECRETKEY_FILE=$BUILDTIME_RAILS_SECRETKEY_FILE
-
 ARG BUILDTIME_DB_PASSWORD_FILE
 ENV DB_PASSWORD_FILE=$BUILDTIME_DB_PASSWORD_FILE
 
@@ -41,8 +38,7 @@ RUN bundle install
 RUN yarn install
 
 # hadolint ignore=SC2215
-RUN --mount=type=secret,id=rails_secret_key_base,target=/run/secrets/rails_secret_key_base \
-    --mount=type=secret,id=db_password,target=/run/secrets/db_password
+RUN --mount=type=secret,id=db_password,target=/run/secrets/db_password
 RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
 FROM ruby:3.3.4-alpine as production
@@ -61,7 +57,6 @@ WORKDIR /app
 
 COPY sindan-visualization/. .
 COPY database.yml config
-COPY secrets.yml config
 COPY seeds.rb db
 
 # hadolint ignore=DL3018,DL3028
