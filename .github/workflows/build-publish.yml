@@ -42,6 +42,7 @@ jobs:
           tags: |
             # set latest tag for default branch
             type=raw,value=latest,enable={{is_default_branch}}
+            type=ref,event=tag
 
       - name: Build and push Docker image (visualization)
         uses: docker/build-push-action@v6
