@@ -32,6 +32,7 @@ RUN apk add --no-cache --update \
       shadow \
       sudo \
       tzdata \
+      yaml-dev \
       yarn
 RUN bundle config set force_ruby_platform true
 RUN bundle install
