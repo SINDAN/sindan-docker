@@ -8,7 +8,7 @@ name: Build
 on:
   push:
     branches: [ "master" ]
-    tag: []
+    tag: "*"
 
 env:
   REGISTRY: ghcr.io
