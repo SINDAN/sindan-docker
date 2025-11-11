@@ -87,10 +87,8 @@ services:
       context: ./visualization
       target: production
       secrets:
-        - rails_secret_key_base
         - db_password
       args:
-        - BUILDTIME_RAILS_SECRETKEY_FILE=/run/secrets/rails_secret_key_base
         - BUILDTIME_DB_PASSWORD_FILE=/run/secrets/db_password
     hostname: sindan-visualization
     restart: always
@@ -101,14 +99,13 @@ services:
       - "3000:3000"
     secrets:
       - db_password
-      - rails_secret_key_base
       - accounts
     env_file:
       - .env
+      - .secrets/rails_secret_key_base.env
     environment:
       DB_HOST: mysql
       DB_PASSWORD_FILE: "/run/secrets/db_password"
-      RAILS_SECRETKEY_FILE: "/run/secrets/rails_secret_key_base"
       ACCOUNTS_FILE: "/run/secrets/accounts"
     command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     healthcheck:
@@ -162,8 +159,6 @@ services:
 secrets:
   db_password:
     file: .secrets/db_password.txt
-  rails_secret_key_base:
-    file: .secrets/rails_secret_key_base.txt
   accounts:
     file: .secrets/accounts.yml
   gf_user:

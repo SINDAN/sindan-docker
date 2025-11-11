@@ -102,16 +102,16 @@ $ vim caddy/domain.env
 Build dockerfile and initialize database. This might take a while.
 
 ```bash
-$ cp .secrets/rails_secret_key_base.txt.example .secrets/rails_secret_key_base.txt
+$ cp .secrets/rails_secret_key_base.env.example .secrets/rails_secret_key_base.env
 $ make build init
 ```
 
 Instead of building locally, you can download pre-built images from [GitHub Packages](https://github.com/orgs/SINDAN/packages?repo_name=sindan-docker).
-Note that in this case, you must not edit `rails_secret_key_base.txt` as you like.
+Note that in this case, you must not edit `rails_secret_key_base.env` as you like.
 Just follow the next:
 
 ```bash
-$ cp .secrets/rails_secret_key_base.txt.example .secrets/rails_secret_key_base.txt
+$ cp .secrets/rails_secret_key_base.env.example .secrets/rails_secret_key_base.env
 $ make pull init
 ```
 
