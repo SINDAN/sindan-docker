@@ -26,10 +26,11 @@ RUN apk add --no-cache --update \
       libstdc++ \
       libxml2-dev \
       libxslt-dev \
-      libffi \
+      libffi-dev \
       mariadb-connector-c-dev \
       mariadb-dev \
       nodejs \
+      npm \
       shadow \
       sudo \
       tzdata \
@@ -66,7 +67,7 @@ RUN apk add --no-cache --update \
       libstdc++ \
       libxml2-dev \
       libxslt-dev \
-      libffi \
+      libffi-dev \
       mariadb-connector-c \
       tzdata
 
