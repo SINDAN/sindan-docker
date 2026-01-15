@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:experimental
-FROM ruby:3.4.7-alpine as builder
+FROM ruby:3.4.8-alpine as builder
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 
 ARG BUILDTIME_DB_PASSWORD_FILE
@@ -26,6 +26,7 @@ RUN apk add --no-cache --update \
       libstdc++ \
       libxml2-dev \
       libxslt-dev \
+      libffi \
       mariadb-connector-c-dev \
       mariadb-dev \
       nodejs \
@@ -41,7 +42,7 @@ RUN npm install
 RUN --mount=type=secret,id=db_password,target=/run/secrets/db_password
 RUN SECRET_KEY_BASE_DUMMY=1 bundle exec rails assets:precompile
 
-FROM ruby:3.4.7-alpine as production
+FROM ruby:3.4.8-alpine as production
 LABEL maintainer "mi2428 <tmiya@protonmail.ch>"
 LABEL org.opencontainers.image.source https://github.com/SINDAN/sindan-docker
 
@@ -65,6 +66,7 @@ RUN apk add --no-cache --update \
       libstdc++ \
       libxml2-dev \
       libxslt-dev \
+      libffi \
       mariadb-connector-c \
       tzdata
 
