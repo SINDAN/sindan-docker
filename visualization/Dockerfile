@@ -32,11 +32,10 @@ RUN apk add --no-cache --update \
       shadow \
       sudo \
       tzdata \
-      yaml-dev \
-      yarn
+      yaml-dev
 RUN bundle config set force_ruby_platform true
 RUN bundle install
-RUN yarn install
+RUN npm install
 
 # hadolint ignore=SC2215
 RUN --mount=type=secret,id=db_password,target=/run/secrets/db_password
