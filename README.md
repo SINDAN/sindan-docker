@@ -23,8 +23,8 @@ If you want to use this for development or testing purposes, some configurations
 To build images on your local environment, **Docker with BuildKit support is needed.**
 GNU/Make is not necessary, but it can reduce the number of commands you type.
 
-- docker-engine: 18.06.0 and higher
-- docker-compose: 1.22.0 and higher
+- docker-engine: 20.10.0 and higher
+- docker-compose: 2.25.0 and higher
 
 By default, SINDAN servers listen and wait for requests from external network at the following ports.
 Open these ports in your firewall beforehand as needed.
