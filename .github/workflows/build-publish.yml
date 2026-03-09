@@ -46,7 +46,7 @@ jobs:
             type=ref,event=tag
 
       - name: Build and push Docker image (visualization)
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./visualization
           #file: ./visualization/Dockerfile
@@ -82,7 +82,7 @@ jobs:
             type=ref,event=tag
 
       - name: Build and push Docker image (fluentd)
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./fluentd
           push: ${{ github.event_name != 'pull_request' }}
@@ -117,7 +117,7 @@ jobs:
             type=ref,event=tag
 
       - name: Build and push Docker image (grafana)
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./grafana
           push: ${{ github.event_name != 'pull_request' }}
