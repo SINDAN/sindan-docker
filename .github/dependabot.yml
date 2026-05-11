@@ -6,11 +6,12 @@ updates:
       interval: "weekly"
   - package-ecosystem: "docker"
     directories:
-      - "/caddy"
       - "/fluentd"
       - "/grafana"
-      - "/mysql"
-      - "/notification"
-      - "/visualization"
+      #- "/visualization"
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "docker-compose"
+    directory: "/"
     schedule:
       interval: "monthly"
