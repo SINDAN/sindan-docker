@@ -1,4 +1,4 @@
-FROM grafana/grafana:13.2.2
+FROM grafana/grafana:13.3.0
 LABEL org.opencontainers.image.source https://github.com/SINDAN/sindan-docker
 
 USER root
